@@ -1,0 +1,284 @@
+body {
+  margin-bottom: 0px;
+  padding: 0px;
+  background: url("../asset/abc.mp4");
+  background-size: cover;
+  background-position: center;
+  font-family: sans-serif;
+  height: 100vh;
+}
+.login-box {
+  width: 320px;
+  height: 420px;
+  background: rgba(0, 0, 0, 0.651);
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  box-sizing: border-box;
+  padding: 70px;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  border-top: 1px solid #25aae1;
+  border-right: 1px solid #4481eb;
+  border-bottom: 1px solid #0453fe;
+  border-left: 1px solid #3e4eee;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: -moz-hidden-unscrollable;
+}
+
+span {
+  position: absolute;
+  border-radius: 100vmax;
+}
+
+.top {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background: linear-gradient(90deg, transparent 50%, #25a9e170, #25aae1);
+}
+
+.bottom {
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #0453fe70, #0453fe, transparent 50%);
+}
+
+.right {
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 0;
+  background: linear-gradient(180deg, transparent 30%, #4481eb70, #4481eb);
+}
+
+.left {
+  left: 0;
+  bottom: 0;
+  width: 5px;
+  height: 0;
+  background: linear-gradient(180deg, #3e4aee70, #3e4eee, transparent 70%);
+}
+
+.top {
+  animation: animateTop 3s ease-in-out infinite;
+}
+
+.bottom {
+  animation: animateBottom 3s ease-in-out infinite;
+}
+
+.right {
+  animation: animateRight 3s linear infinite;
+}
+
+.left {
+  animation: animateLeft 3s ease-in-out infinite;
+}
+
+@keyframes animateTop {
+  25% {
+    width: 100%;
+    opacity: 1;
+  }
+
+  30%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animateBottom {
+  0%,
+  50% {
+    opacity: 0;
+    width: 0;
+  }
+
+  75% {
+    opacity: 1;
+    width: 100%;
+  }
+
+  76%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animateRight {
+  0%,
+  25% {
+    opacity: 0;
+    height: 0;
+  }
+
+  50% {
+    opacity: 1;
+    height: 100%;
+  }
+
+  55%,
+  100% {
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes animateLeft {
+  0%,
+  75% {
+    opacity: 0;
+    bottom: 0;
+    height: 0;
+  }
+
+  100% {
+    opacity: 1;
+    height: 100%;
+  }
+}
+.avatar {
+  width: 130px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  top: 10%;
+  left: 45%;
+}
+h1 {
+  margin-top: 0px;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
+}
+.login-box p {
+  margin-bottom: 0px;
+  padding: 0px;
+  font-weight: bold;
+  text-align: center;
+}
+.login-box input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.login-box input[type="text"],
+input[type="password"] {
+  border: none;
+  border-bottom: 3px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+.btn-hover {
+  width: 200px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  margin-top: 10px;
+  height: 45px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+
+  transition: all 0.4s ease-in-out;
+}
+.btn-hover:hover {
+  background-position: 100% 0;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  color: rgb(7, 0, 107);
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+
+.btn-hover.color {
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #0453fe,
+    #653fed
+  );
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.section {
+  padding: 7rem 0;
+  overflow: hidden;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header .text {
+  color: white;
+}
+
+.section-header .text {
+  max-width: 500px;
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+/* video */
+
+.anjay {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.8);
+}
+
+.back-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+@media (min-aspect-ration: 16/89) {
+  .back-video {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-aspect-ration: 16/89) {
+  .back-video {
+    width: auto;
+    height: 100%;
+  }
+}
+/* end video */
