@@ -91,7 +91,7 @@
               <i class="menu-icon fa fa-glass"></i>Data User</a>
           </li>
           <li class="menu-item">
-            <a href="#" onclick="logoutConfirmation();">
+            <a href="login.php" onclick="logoutConfirmation();">
               <i class="menu-icon fa fa-sign-out"></i>
               <span class="menu-text" style="color: red;">Logout</span>
             </a>
@@ -141,8 +141,8 @@
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-                <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+              <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
           </div>
