@@ -128,7 +128,7 @@ session_start();
     <header id="header" class="header">
       <div class="top-left">
         <div class="navbar-header">
-          <a class="navbar-brand" style="color: black ; " href="">
+          <a class="navbar-brand" style="color: black ; " href="admin.php">
             <h4><span>ASWAJA TRANS</span></h3>
           </a>
           <a class="navbar-brand hidden" href="./"><img src="assets/images/logo2.png" alt="Logo" /></a>
