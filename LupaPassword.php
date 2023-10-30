@@ -3,9 +3,9 @@ session_start();
 require_once('koneksi.php');
 
 if (isset($_POST['simpan'])) {
-  $username = mysqli_real_escape_string($conn, $_POST['username']);
-  $hint = mysqli_real_escape_string($conn, $_POST['hint']);
-  $jawab = mysqli_real_escape_string($conn, $_POST['jawab']);
+  $username = $_POST['username'];
+  $hint = $_POST['hint'];
+  $jawab = $_POST['jawab'];
   $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Hash the password for security
 
   $querycari = "SELECT * FROM user WHERE Username = '$username' AND Hint = '$hint' AND JawabanHint = '$jawab'";
