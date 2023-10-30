@@ -8,20 +8,21 @@ if (isset($_POST['submit'])) {
 
   if (!empty($username) && !empty($password)) {
     $query = "SELECT username, password FROM user WHERE Username = '$username'";
-    $datas = mysqli_query($conn, $query)->fetch_assoc();
+    $result = mysqli_query($conn, $query);
+    $datas = $result->fetch_assoc();
 
-    if ($datas && $password == $datas['password']) {
+    if ($datas && password_verify($password, $datas['password'])) {
       // Login berhasil, tampilkan SweetAlert2 berhasil
     	$_SESSION["login"] = 'Anda Berhasil Login';
       header("Location: admin.php");
     } else {
     	$_SESSION["erorr"] = 'Login Gagal';
       // Login gagal, tampilkan SweetAlert2 gagal
-      
     }
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -73,20 +74,6 @@ if (isset($_POST['submit'])) {
     <!-- agar sweet alert tidak muncul lagi saat di refresh -->
   <?php unset($_SESSION['sukses']);
   } ?>
-  <?php if (@$_SESSION['eror']) { ?>
-    <script>
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses',
-        text: 'Registrasi Anda Gagal',
-        timer: 2000,
-        showConfirmButton: false
-      });
-    </script>
-    <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-  <?php unset($_SESSION['eror']);
-  } ?>
-
   <?php if (@$_SESSION['luppus']) { ?>
   <script>
     Swal.fire({
@@ -100,18 +87,18 @@ if (isset($_POST['submit'])) {
   <!-- agar sweet alert tidak muncul lagi saat di refresh -->
 <?php unset($_SESSION['luppus']);
 } ?>
-<?php if (@$_SESSION['luput']) { ?>
-  <script>
-    Swal.fire({
-      icon: 'eror',
-      title: 'Gagal',
-      text: 'Password Gagal Diubah',
-      timer: 2000,
-      showConfirmButton: false
-    });
-  </script>
-  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-<?php unset($_SESSION['luput']);
-} ?>
+ <?php if (@$_SESSION['erorr']) { ?>
+          <script>
+            Swal.fire({
+              icon: 'eror',
+              title: 'Gagal',
+              text: 'Login Gagal',
+              timer: 2000,
+              showConfirmButton: false
+            });
+          </script>
+          <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+        <?php unset($_SESSION['erorr']);
+        } ?>
 
 </html>

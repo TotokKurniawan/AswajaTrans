@@ -1,5 +1,6 @@
-<?php 
-session_start(); ?>
+<?php
+session_start();
+require_once("koneksi.php") ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -142,7 +143,7 @@ session_start(); ?>
               </a>
 
               <div class="user-menu dropdown-menu">
-              <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
                 <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
@@ -187,28 +188,19 @@ session_start(); ?>
                   <thead>
                     <tr>
                       <th>No</th>
+                      <th>Fullame</th>
                       <th>Username</th>
                       <th>Password</th>
                       <th>Hint</th>
                       <th>Jawaban Hint</th>
                       <th>Foto</th>
-                      <th><center>Action</center></th>
+                      <th>
+                        <center>Action</center>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    // Menghubungkan ke database (gantilah dengan informasi koneksi Anda)
-                    $db_host = 'localhost';
-                    $db_user = 'root';
-                    $db_pass = '';
-                    $db_name = 'aswajatrans2';
-
-                    $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-                    if (!$conn) {
-                      die("Koneksi ke database gagal: " . mysqli_connect_error());
-                    }
-
                     // Query SQL untuk mengambil data dari tabel
                     $sql = "SELECT * FROM user";
                     $result = mysqli_query($conn, $sql);
@@ -218,17 +210,56 @@ session_start(); ?>
                       while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $row['Nama'] . "</td>";
                         echo "<td>" . $row['Username'] . "</td>";
                         echo "<td>" . $row['Password'] . "</td>";
                         echo "<td>" . $row['Hint'] . "</td>";
                         echo "<td>" . $row['JawabanHint'] . "</td>";
                         echo "<td>" . $row['Foto'] . "</td>";
-                        echo "<td>";
-                        echo "<a href='hapus/hapususer.php?id=" . $row['id'] . "&reqkarya=dell' title='Hapus Simpanan' class='btn btn-danger btn-sm alert_notif'>
-        <i class='fa fa-trash-o'></i> Hapus
-      </a>";
-                        echo "</td>";
+                        echo '<td>
+        <center>
+            <button type="button" name="edit" data-toggle="modal"
+                data-target="#editModal' . $row["id"] . '" title="Edit Data ini"
+                class="btn btn-sm" style="background: darkslateblue; color:white;"><i
+                    class="fa fa-edit"></i>
+                Edit
+            </button>
+            <a href="hapus/hapususer.php?id=' . $row['id'] . '&reqkarya=dell" title="Hapus Simpanan" class="btn btn-danger btn-sm alert_notif">
+                <span class="fa fa-trash-o"> Hapus</span>
+            </a>
+        </center>
+    </td>';
                         echo "</tr>";
+
+                        // Menampilkan modal edit untuk setiap data pengguna
+                        echo '<div id="editModal' . $row["id"] . '" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Edit Data User</h4>
+            </div>
+            <div class="modal-body">
+              <form action="edit/edituser.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="' . $row["id"] . '" />
+                <label>Fullname</label>
+                <input type="text" name="name" value="' . $row["Nama"] . '" class="form-control" />
+                <br />
+                <label>Username</label>
+                <input type="text" name="usera" value="' . $row["Username"] . '" class="form-control" />
+                <br />
+                <label>Password</label>
+                <input type="password" name="pass" placeholder="********" class="form-control" />
+                <br />
+                <input type="submit" name="update" value="Update" class="btn btn-success" />
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>';
                       }
                     } else {
                       echo "<tr><td colspan='7'>Tidak ada data</td></tr>";
@@ -237,6 +268,7 @@ session_start(); ?>
                     // Tutup koneksi ke database
                     mysqli_close($conn);
                     ?>
+
                   </tbody>
                 </table>
               </div>
@@ -280,12 +312,39 @@ session_start(); ?>
   <script src="assets/js/lib/data-table/buttons.print.min.js"></script>
   <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
   <script src="assets/js/init/datatables-init.js"></script>
-   <script src="sweetallert/sweetalert2.min.js"></script>
+  <script src="sweetallert/sweetalert2.min.js"></script>
 
-
+  <?php if (@$_SESSION['editdatuser']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'Data Berhasil Diubah',
+        timer: 2000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['editdatuser']);
+  } ?>
   <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
         di dalam session sukses  -->
-        <?php if (@$_SESSION['suksessss']) { ?>
+  <?php if (@$_SESSION['eroreditdatauser']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: 'Gagal',
+        timer: 2000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['eroreditdatauser']);
+  } ?>
+  <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
+        di dalam session sukses  -->
+  <?php if (@$_SESSION['suksessss']) { ?>
     <script>
       Swal.fire({
         icon: 'success',
@@ -299,25 +358,25 @@ session_start(); ?>
   <?php unset($_SESSION['suksessss']);
   } ?>
   <script>
-    $('.alert_notif').on('click', function (e) {
-        e.preventDefault(); // Mencegah perilaku default dari tautan
-        var getLink = $(this).attr('href');
-        Swal.fire({
-            title: "Anda Yakin Menghapus Data Ini?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'Yes',
-            cancelButtonColor: '#3085d6',
-            cancelButtonText: "Cancel"
-        }).then(result => {
-            // Jika klik ya maka arahkan ke proses.php
-            if (result.isConfirmed) {
-                window.location.href = getLink;
-            }
-        });
+    $('.alert_notif').on('click', function(e) {
+      e.preventDefault(); // Mencegah perilaku default dari tautan
+      var getLink = $(this).attr('href');
+      Swal.fire({
+        title: "Anda Yakin Menghapus Data Ini?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: "Cancel"
+      }).then(result => {
+        // Jika klik ya maka arahkan ke proses.php
+        if (result.isConfirmed) {
+          window.location.href = getLink;
+        }
+      });
     });
-</script>
+  </script>
 
   <script type="text/javascript">
     $(document).ready(function() {

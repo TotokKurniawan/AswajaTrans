@@ -169,7 +169,7 @@ session_start(); ?>
     <header id="header" class="header">
       <div class="top-left">
         <div class="navbar-header">
-          <a class="navbar-brand" style="color: black ; " href="index.html">
+          <a class="navbar-brand" style="color: black ; " href="">
             <h4><span>ASWAJA TRANS</span></h3>
           </a>
           <a class="navbar-brand hidden" href="./"><img src="assets/images/logo2.png" alt="Logo" /></a>
@@ -186,7 +186,7 @@ session_start(); ?>
               </a>
 
               <div class="user-menu dropdown-menu">
-              <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
                 <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
@@ -425,161 +425,147 @@ session_start(); ?>
               </div>
             </div>
 
-          
-        <!-- /# column -->
-      </div>
+
+            <!-- /# column -->
+          </div>
 
 
-        <!-- Calender Chart Weather  -->
-        <div class="row">
-          <div class="col-md-12 col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <!-- <h4 class="box-title">Chandler</h4> -->
-                <div class="calender-cont widget-calender center">
-                  <div id="calendar"></div>
+          <!-- Calender Chart Weather  -->
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <!-- <h4 class="box-title">Chandler</h4> -->
+                  <div class="calender-cont widget-calender center">
+                    <div id="calendar"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
 
 
-        <!-- /Calender Chart Weather -->
-        <!-- Modal - Calendar - Add New Event -->
-        <div class="modal fade none-border" id="event-modal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                  &times;
-                </button>
-                <h4 class="modal-title"><strong>Tambah Tanggal</strong></h4>
-              </div>
-              <div class="modal-body"></div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">
-                  Tutup
-                </button>
-                <button type="button" class="btn btn-success save-event waves-effect waves-light">
-                  Simpan
-                </button>
-                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">
-                  Hapus
-                </button>
+          <!-- /Calender Chart Weather -->
+          <!-- Modal - Calendar - Add New Event -->
+          <div class="modal fade none-border" id="event-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                  </button>
+                  <h4 class="modal-title"><strong>Tambah Tanggal</strong></h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">
+                    Tutup
+                  </button>
+                  <button type="button" class="btn btn-success save-event waves-effect waves-light">
+                    Simpan
+                  </button>
+                  <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">
+                    Hapus
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /#event-modal -->
-        <!-- Modal - Calendar - Add Category -->
-        <div class="modal fade none-border" id="add-category">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                  &times;
-                </button>
-                <h4 class="modal-title"><strong>Add a category </strong></h4>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label class="control-label">Category Name</label>
-                      <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+          <!-- /#event-modal -->
+          <!-- Modal - Calendar - Add Category -->
+          <div class="modal fade none-border" id="add-category">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                  </button>
+                  <h4 class="modal-title"><strong>Add a category </strong></h4>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label class="control-label">Category Name</label>
+                        <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="control-label">Choose Category Color</label>
+                        <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                          <option value="success">Selesai</option>
+                          <option value="danger">Pengeluaran</option>
+                          <option value="info">Service</option>
+                          <option value="warning">Warning</option>
+                        </select>
+                      </div>
                     </div>
-                    <div class="col-md-6">
-                      <label class="control-label">Choose Category Color</label>
-                      <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-                        <option value="success">Selesai</option>
-                        <option value="danger">Pengeluaran</option>
-                        <option value="info">Service</option>
-                        <option value="warning">Warning</option>
-                      </select>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">
-                  Tutup
-                </button>
-                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">
-                  Simpan
-                </button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">
+                    Tutup
+                  </button>
+                  <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">
+                    Simpan
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /#add-category -->
+          <!-- /#add-category -->
 
-        <!-- Footer -->
-        <footer class="site-footer">
-          <div class="footer-inner bg-white">
-            <div class="row">
-              <div class="col-sm-6 ">Copyright &copy; 2023 TEAM 1 MIF D</div>
+          <!-- Footer -->
+          <footer class="site-footer">
+            <div class="footer-inner bg-white">
+              <div class="row">
+                <div class="col-sm-6 ">Copyright &copy; 2023 TEAM 1 MIF D</div>
+              </div>
             </div>
-          </div>
-        </footer>
+          </footer>
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-        <script src="assets/js/main2.js"></script>
+          <!-- Scripts -->
+          <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+          <script src="assets/js/main2.js"></script>
 
-        <!--  Chart js -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+          <!--  Chart js -->
+          <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
-        <!--Chartist Chart-->
-        <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+          <!--Chartist Chart-->
+          <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-
-
-        <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-        <script src="assets/js/init/fullcalendar-init.js"></script>
-        <script src="sweetallert/sweetalert2.min.js"></script>
-
-        <!--Local Stuff-->
+          <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
 
 
-        <?php if (@$_SESSION['login']) { ?>
-          <script>
-            Swal.fire({
-              icon: 'success',
-              title: 'Sukses',
-              text: 'Anda Berhasil login',
-              timer: 2000,
-              showConfirmButton: false
-            });
-          </script>
-          <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-        <?php unset($_SESSION['login']);
-        } ?>
-        <?php if (@$_SESSION['erorr']) { ?>
-          <script>
-            Swal.fire({
-              icon: 'eror',
-              title: 'Gagal',
-              text: 'Login Gagal',
-              timer: 2000,
-              showConfirmButton: false
-            });
-          </script>
-          <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-        <?php unset($_SESSION['erorr']);
-        } ?>
+          <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+          <script src="assets/js/init/fullcalendar-init.js"></script>
+          <script src="sweetallert/sweetalert2.min.js"></script>
 
+          <!--Local Stuff-->
+
+
+          <?php if (@$_SESSION['login']) { ?>
+            <script>
+              Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: 'Anda Berhasil login',
+                timer: 2000,
+                showConfirmButton: false
+              });
+            </script>
+            <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+          <?php unset($_SESSION['login']);
+          } ?>
 </body>
 
 </html>

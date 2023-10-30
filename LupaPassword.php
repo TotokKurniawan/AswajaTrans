@@ -56,6 +56,8 @@ if (isset($_POST['simpan'])) {
   
   <link rel="apple-touch-icon" href="assets/img/istockphoto-669053856-170667a.jpg" />
   <link rel="shortcut icon" href="assets/img/istockphoto-669053856-170667a.jpg" />
+  <link rel="stylesheet" href="sweetallert/sweetalert2.min.css">
+
   <style>
     body {
       margin: 0;
@@ -152,6 +154,20 @@ if (isset($_POST['simpan'])) {
       </div>
     </div>
   </section>
-</body>
+  <script src="sweetallert/sweetalert2.min.js"></script>
 
+</body>
+<?php if (@$_SESSION['luput']) { ?>
+  <script>
+    Swal.fire({
+      icon: 'eror',
+      title: 'Gagal',
+      text: 'Password Gagal Diubah',
+      timer: 2000,
+      showConfirmButton: false
+    });
+  </script>
+  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+<?php unset($_SESSION['luput']);
+} ?>
 </html>

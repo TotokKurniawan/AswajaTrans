@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start(); ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -144,7 +144,7 @@ session_start(); ?>
               </a>
 
               <div class="user-menu dropdown-menu">
-              <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
                 <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
@@ -218,7 +218,7 @@ session_start(); ?>
                     }
 
                     // Query SQL untuk mengambil data mobil
-                    $sql = "SELECT * FROM mobil";
+                    $sql = "SELECT * FROM mobil ORDER BY merkmobil ASC";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {
@@ -347,33 +347,33 @@ session_start(); ?>
   <script src="sweetallert/sweetalert2.min.js"></script>
 
   <?php if (@$_SESSION['insertdatamobil']) { ?>
-  <script>
-    Swal.fire({
-      icon: 'success',
-      title: 'Sukses',
-      text: 'Data Berhasil Disimpan',
-      timer: 2000,
-      showConfirmButton: false
-    })
-  </script>
-  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-<?php unset($_SESSION['insertdatamobil']);
-} ?>
-<!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'Data Berhasil Disimpan',
+        timer: 2000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['insertdatamobil']);
+  } ?>
+  <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
         di dalam session sukses  -->
-<?php if (@$_SESSION['erorinsertdatamobil']) { ?>
-  <script>
-    Swal.fire({
-      icon: 'error',
-      title: 'Data Berelasi',
-      text: 'Gagal',
-      timer: 2000,
-      showConfirmButton: false
-    })
-  </script>
-  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-<?php unset($_SESSION['erorinsertdatamobil']);
-} ?>
+  <?php if (@$_SESSION['erorinsertdatamobil']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Data Berelasi',
+        text: 'Gagal',
+        timer: 2000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['erorinsertdatamobil']);
+  } ?>
 
   <?php if (@$_SESSION['editdatamobil']) { ?>
     <script>
