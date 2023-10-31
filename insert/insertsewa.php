@@ -13,7 +13,7 @@ if (!empty($_POST)) {
     $totalSewa = $_POST["totsewa"];
 
     // Perbaikan query SQL
-    $querySewa = "INSERT INTO sewa (id_Sewa, Tgl_sewa, Bayar, `Sisa yang harus dibayar`, StatusBayar, Total_Harga, Total_Sewa, NIK) VALUES ('$kodeNota', '$tanggalsewa', '$bayar', '$sis_byr', '$statusBayar', '$totalHarga', '$totalSewa', '$nik')";
+    $querySewa = "INSERT INTO sewa (id_Sewa, Tgl_sewa, Bayar,  StatusBayar, Total_Sewa, NIK) VALUES ('$kodeNota', '$tanggalsewa', '$bayar',  '$statusBayar', '$totalSewa', '$nik')";
 
     // Eksekusi query sewa
     $resultSewa = mysqli_query($conn, $querySewa);

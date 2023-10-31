@@ -177,7 +177,7 @@ mysqli_close($conn);
               </a>
 
               <div class="user-menu dropdown-menu">
-              <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
                 <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
@@ -274,13 +274,7 @@ mysqli_close($conn);
                       <input class="form-control" name="bayar" id="bayar">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class=" form-control-label">Sisa Bayar</label>
-                    <div class="input-group">
-                      <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                      <input class="form-control" name="sisa" id="sisa">
-                    </div>
-                  </div>
+
                   <div class="form-group">
                     <label class=" form-control-label">Status Bayar</label>
                     <div class="input-group">
@@ -299,13 +293,7 @@ mysqli_close($conn);
                     <input class="form-control" name="totsewa" id="totsew">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class=" form-control-label">Total Harga</label>
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
-                    <input class="form-control" name="tothar" id="tothar">
-                  </div>
-                </div>
+                
                 <input type="submit" name="insert" id="insert" value="Simpan" class="btn btn-success" onMouseOver="this.style.backgroundColor=' #00796b'" onMouseOut="this.style.backgroundColor='#4CAF50'" />
 
                     </div>
@@ -350,7 +338,7 @@ mysqli_close($conn);
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-car"></i></div>
                       <select class="form-control" id="nopol" name="nopol">
-                      <option value="">Pilih Mobil</option>
+                        <option value="">Pilih Mobil</option>
 
                         <?php
                         foreach ($_SESSION['harga_data'] as $nopol => $harga) {
@@ -399,6 +387,20 @@ mysqli_close($conn);
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
                       <input class="form-control" name="subtotal" id="subtotal">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class=" form-control-label">Total Harga</label>
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
+                      <input class="form-control" name="tothar" id="tothar">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class=" form-control-label">Sisa Bayar</label>
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                      <input class="form-control" name="sisa" id="sisa">
                     </div>
                   </div>
                   <input type="submit" name="insert" id="insert" value="Simpan Detail" class="btn btn-success" onMouseOver="this.style.backgroundColor=' #00796b'" onMouseOut="this.style.backgroundColor='#4CAF50'" onclick="showSuccessPopup()" />
