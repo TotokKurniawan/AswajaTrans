@@ -4,47 +4,31 @@ require_once('koneksi.php');
 
 if (isset($_POST['simpan'])) {
   $username = $_POST['username'];
-  $newPassword = $_POST['password'];
+  $hint = $_POST['hint'];
+  $jawab = $_POST['jawab'];
+  $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Hash the password for security
 
-  // Pastikan password baru tidak kosong atau memenuhi persyaratan lainnya
-  if (empty($newPassword)) {
-    echo "Kata sandi baru tidak boleh kosong.";
-    // Redirect atau tampilkan pesan sesuai kebijakan aplikasi Anda
-    exit();
-  }
+  $querycari = "SELECT * FROM user WHERE Username = '$username' AND Hint = '$hint' AND JawabanHint = '$jawab'";
+  $resultcari = mysqli_query($conn, $querycari);
 
-  // Periksa apakah username ada dalam database
-  $checkUserQuery = "SELECT username FROM user WHERE username = ?";
+  if (mysqli_num_rows($resultcari) == 1) {
+    // User found, update the password
+    $queryUpdate = "UPDATE user SET Password = '$pass' WHERE Username = '$username'";
+    $resultUpdate = mysqli_query($conn, $queryUpdate);
 
-  $stmtCheck = $conn->prepare($checkUserQuery);
-  $stmtCheck->bind_param("s", $username);
-  $stmtCheck->execute();
-  $stmtCheck->store_result();
-
-  if ($stmtCheck->num_rows == 1) {
-    // Username ditemukan, perbarui kata sandi pengguna di tabel "user" dalam database
-    $updateQuery = "UPDATE user SET password = ? WHERE username = ?";
-
-    $stmt = $conn->prepare($updateQuery);
-    $stmt->bind_param("ss", $newPassword, $username);
-
-    if ($stmt->execute()) {
-      $_SESSION["luppus"] = 'Password Anda Berhasil Diubah';
-      header('Location: login.php');
+    if ($resultUpdate) {
+      // Password updated successfully
+      $_SESSION['luppus'] = 'Password Berhasil Diubah';
+      header("Location: login.php");
+      exit();
     } else {
-      $_SESSION["luput"] = 'Password Anda Gagal Diubah';
-      header('Location: LupaPassword.php');
+      $_SESSION["error"] = 'Gagal mengupdate kata sandi';
     }
-
-    $stmt->close();
   } else {
-    echo "Username tidak ditemukan.";
+    $_SESSION["error"] = 'Username Tidak Ditemukan atau jawaban hint salah';
   }
-
-  $stmtCheck->close();
 }
 ?>
-
 
 <head>
   <meta charset="UTF-8" />
@@ -53,7 +37,7 @@ if (isset($_POST['simpan'])) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/luppas.css" />
-  
+
   <link rel="apple-touch-icon" href="assets/img/istockphoto-669053856-170667a.jpg" />
   <link rel="shortcut icon" href="assets/img/istockphoto-669053856-170667a.jpg" />
   <link rel="stylesheet" href="sweetallert/sweetalert2.min.css">
@@ -63,10 +47,13 @@ if (isset($_POST['simpan'])) {
       margin: 0;
       overflow: hidden;
     }
-  .panel.panel-default {
-    background-color: rgba(0, 0, 0, 0); /* Warna merah dengan opacity 0.5 */
-    color: white; /* Mengatur warna teks menjadi putih */
-  }
+
+    .panel.panel-default {
+      background-color: rgba(0, 0, 0, 0);
+      /* Warna merah dengan opacity 0.5 */
+      color: white;
+      /* Mengatur warna teks menjadi putih */
+    }
 
     .anjay {
       width: 100%;
@@ -121,7 +108,7 @@ if (isset($_POST['simpan'])) {
               <div class="text-center">
                 <h3><i class="fa fa-lock fa-4x"></i></h3>
                 <h2 class="text-center">Forgot Password?</h2>
-                <p>You can reset your password here.</p>
+                <p>Find Your Account</p>
                 <div class="panel-body">
                   <form method="POST" action="LupaPassword.php">
                     <div class="form-group">
@@ -132,18 +119,32 @@ if (isset($_POST['simpan'])) {
                     </div>
                     <div class="form-group">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock color-blue"></i></span>
-                        <input id="password" name="password" placeholder="New Password" class="form-control" type="password" />
+                        <span class="input-group-addon">
+                          <select class="form-control" name="hint">
+                            <option value="">Choose One Hint</option>
+                            <option value="Siapa Nama Ayahmu ??">Siapa Nama Ayahmu ?? </option>
+                            <option value="Siapa Nama Ibumu ??">Siapa Nama Ibumu ??</option>
+                            <option value="Apa Warna Kesukaanmu ??">Apa Warna Kesukaanmu ??</option>
+                            <option value="Apa Makanan Kesukaanmu ??">Apa Makanan Kesukaanmu ??</option>
+                            <!-- Tambahkan pilihan lainnya sesuai kebutuhan Anda -->
+                          </select>
                       </div>
                     </div>
                     <div class="form-group">
-                      <input name="simpan" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit" />
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user color-blue"></i></span>
+                        <input id="jawab" name="jawab" placeholder="Jawaban Hint" class="form-control" />
+                      </div>
                     </div>
-                    <div id="reset-message" style="display: none">
-                      <!-- Pesan berhasil direset akan muncul di sini -->
-                      Password has been successfully reset.
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user color-blue"></i></span>
+                        <input id="pass" name="pass" type="Password" placeholder="Password" class="form-control" />
+                      </div>
                     </div>
-
+                    <div class="form-group">
+                      <input name="simpan" class="btn btn-lg btn-primary btn-block" value="Find Username" type="submit" />
+                    </div>
                     <input type="hidden" class="hide" name="token" id="token" value="" />
                   </form>
                 </div>
@@ -162,7 +163,7 @@ if (isset($_POST['simpan'])) {
     Swal.fire({
       icon: 'eror',
       title: 'Gagal',
-      text: 'Password Gagal Diubah',
+      text: 'Username Tidak Ditemukan',
       timer: 2000,
       showConfirmButton: false
     });
@@ -170,4 +171,5 @@ if (isset($_POST['simpan'])) {
   <!-- agar sweet alert tidak muncul lagi saat di refresh -->
 <?php unset($_SESSION['luput']);
 } ?>
+
 </html>

@@ -69,7 +69,7 @@ if (isset($_POST['daftar'])) {
   <meta charset="utf-8" />
   <title>Registrasi Form</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <link rel="apple-touch-icon" href="assets/img/istockphoto-669053856-170667a.jpg" />
   <link rel="shortcut icon" href="assets/img/istockphoto-669053856-170667a.jpg" />
 

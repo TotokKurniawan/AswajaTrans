@@ -19,15 +19,14 @@ if (!empty($_POST)) {
     $resultSewa = mysqli_query($conn, $querySewa);
 
     if ($resultSewa) {
-        $_SESSION["insertsewa"] = 'Data Berhasil Di Simpan';    
-        
+        $_SESSION["insertsewa"] = 'Data Berhasil Di Simpan';
+
         // Data berhasil disimpan
-        
+
         header("location: ../sewaUI.php");
     } else {
-        $_SESSION["erorinsertsewa"] = 'Data Gagal';    
+        $_SESSION["erorinsertsewa"] = 'Data Gagal';
         // Handle kesalahan jika query sewa gagal
         echo "Error: " . mysqli_error($conn);
     }
 }
-?>
