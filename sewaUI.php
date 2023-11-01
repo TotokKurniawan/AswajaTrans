@@ -116,7 +116,7 @@ mysqli_close($conn);
           </li>
 
           <li class="menu-item-">
-            <a href="maps.html" aria-haspopup="true" aria-expanded="false">
+            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
               <i class="menu-icon fa fa-map"></i>Maps</a>
           </li>
           <li class="menu-title">User</li>

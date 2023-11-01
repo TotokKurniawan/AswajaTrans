@@ -122,11 +122,12 @@ if (isset($_POST['daftar'])) {
           <input type="file" class="form-control" placeholder="Upload Foto" name="foto" />
         </div>
         <div class="g-recaptcha" data-sitekey="6LfdS9soAAAAAOAdcVgAueix-VUO_kc0sYh-3aCV"></div>
-        <!-- 6LfdS9soAAAAABAyMyMXjUX9EhDtL7tNHTv0aEzZ -->
-
+        <!-- 6LfdS9soAAAAABAyMyMXjUX9EhDtL7tNHTv0aEzZ --><br>
+        <a href="login.php">Already Have An Account?</a>
         <button type="submit" name="daftar">
           <span>Register</span>
         </button>
+
       </form>
       <!-- <img src="#" alt="" class="image-2" /> -->
     </div>

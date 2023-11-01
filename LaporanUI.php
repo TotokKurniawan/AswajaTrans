@@ -81,7 +81,7 @@
           </li>
 
           <li class="menu-item-">
-            <a href="maps.html" aria-haspopup="true" aria-expanded="false">
+            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
               <i class="menu-icon fa fa-map"></i>Maps</a>
           </li>
           <li class="menu-title">User</li>
@@ -141,7 +141,7 @@
               </a>
 
               <div class="user-menu dropdown-menu">
-              <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
                 <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
@@ -212,133 +212,133 @@
                 if (isset($_GET['bln'])) {
                   require_once 'koneksi.php';
                   require_once 'fungsi/funct.php';
-              
+
                   $bulan = $_GET['bln']; // Simpan bulan yang dipilih
                   $sql = mysqli_query($conn, "SELECT sewa.*, mobil.MerkMobil, detail_sewa.Tgl_Kembali
                   FROM sewa
                   JOIN detail_sewa ON sewa.id_Sewa = detail_sewa.id_Sewa
                   JOIN mobil ON mobil.Nopol = detail_sewa.Nopol
                   WHERE MONTH(sewa.Tgl_sewa) = '$bulan' ORDER BY sewa.id_Sewa ASC");
-               
+
                   if ($sql) {
                     $jum = mysqli_num_rows($sql);
                     if ($jum > 0) {
                 ?>
-                    <br>
-                    <div class="table-responsive">
-                      <table id="dataTable" class="table table-bordered table-striped">
-                        <thead>
-                          <tr class="info">
-                            <th>
-                              <center>Kode Struk</center>
-                            </th>
-                            <th>
-                              <center>Merk Mobil</center>
-                            </th>
-                            <th>
-                              <center>Tgl Sewa</center>
-                            </th>
-                            <th>
-                              <center>Tgl Kembali</center>
-                            </th>
-                            <th>
-                              <center>Bayar</center>
-                            </th>
-                            <th>
-                              <center>Total Harga</center>
-                            </th>
-                            <th>
-                              <center>Action</center>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                          $no = 1;
-                          while ($data = mysqli_fetch_array($sql)) {
-                          ?>
-                            <tr>
-                              <td>
-                                <center><?php echo $data['id_Sewa'] ?></center>
-                              </td>
-                              <td>
-                                <center><?php echo $data['MerkMobil']; ?></center>
-                              </td>
-                              <td>
-                                <center><?php echo $data['Tgl_sewa'] ?></center>
-                              </td>
-                              <td>
-                                <center><?php echo $data['Tgl_Kembali'] ?></center>
-                              </td>
-                              <td>
-                                <center><?php echo $data['bayar'] ?></center>
-                              </td>
-                              <td>
-                                <center><?php echo $data['Total_Harga'] ?></center>
-                              </td>
-                              <td>
-                                <center><a href="cetak/cetaklaporan.php?id_Sewa=<?php echo $data['id_Sewa']; ?>" title="Edit Data ini" class="btn btn-info btn-sm"><i class="fa fa-print "></i> Print</a></center>
-                              </td>
+                      <br>
+                      <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                          <thead>
+                            <tr class="info">
+                              <th>
+                                <center>Kode Struk</center>
+                              </th>
+                              <th>
+                                <center>Merk Mobil</center>
+                              </th>
+                              <th>
+                                <center>Tgl Sewa</center>
+                              </th>
+                              <th>
+                                <center>Tgl Kembali</center>
+                              </th>
+                              <th>
+                                <center>Bayar</center>
+                              </th>
+                              <th>
+                                <center>Total Harga</center>
+                              </th>
+                              <th>
+                                <center>Action</center>
+                              </th>
                             </tr>
-                          <?php
-                            $no++;
-                          }
-                          ?>
-                        </tbody>
-                      </table>
-                    </div>
+                          </thead>
+                          <tbody>
+                            <?php
+                            $no = 1;
+                            while ($data = mysqli_fetch_array($sql)) {
+                            ?>
+                              <tr>
+                                <td>
+                                  <center><?php echo $data['id_Sewa'] ?></center>
+                                </td>
+                                <td>
+                                  <center><?php echo $data['MerkMobil']; ?></center>
+                                </td>
+                                <td>
+                                  <center><?php echo $data['Tgl_sewa'] ?></center>
+                                </td>
+                                <td>
+                                  <center><?php echo $data['Tgl_Kembali'] ?></center>
+                                </td>
+                                <td>
+                                  <center><?php echo $data['bayar'] ?></center>
+                                </td>
+                                <td>
+                                  <center><?php echo $data['Total_Harga'] ?></center>
+                                </td>
+                                <td>
+                                  <center><a href="cetak/cetaklaporan.php?id_Sewa=<?php echo $data['id_Sewa']; ?>" title="Edit Data ini" class="btn btn-info btn-sm"><i class="fa fa-print "></i> Print</a></center>
+                                </td>
+                              </tr>
+                            <?php
+                              $no++;
+                            }
+                            ?>
+                          </tbody>
+                        </table>
+                      </div>
                 <?php
-                  } else {
-                    echo '<br><div class="alert alert-danger" style="height: 80px; font-size:40px;" align="center">
+                    } else {
+                      echo '<br><div class="alert alert-danger" style="height: 80px; font-size:40px;" align="center">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         DATA BELUM ADA!!!
                         </div>';
+                    }
+                  } else {
+                    echo "Error dalam eksekusi query: " . mysqli_error($conn);
+                  }
                 }
-            } else {
-                echo "Error dalam eksekusi query: " . mysqli_error($conn);
-            }
-        }
                 ?>
                 <br>
               </div>
             </div>
-            </div>
-            <!-- .animated -->
           </div>
-          <!-- .content -->
+          <!-- .animated -->
+        </div>
+        <!-- .content -->
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <footer class="site-footer">
+      <div class="footer-inner bg-white">
+        <div class="row">
+          <div class="col-sm-6 ">Copyright &copy; 2023 TEAM 1 MIF D</div>
         </div>
       </div>
+    </footer>
+  </div>
+  <!-- /#right-panel -->
 
-      <div class="clearfix"></div>
+  <!-- Right Panel -->
 
-      <footer class="site-footer">
-        <div class="footer-inner bg-white">
-          <div class="row">
-            <div class="col-sm-6 ">Copyright &copy; 2023 TEAM 1 MIF D</div>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <!-- /#right-panel -->
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+  <script src="assets/js/main2.js"></script>
 
-    <!-- Right Panel -->
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main2.js"></script>
-
-    <script src="assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="assets/js/init/datatables-init.js"></script>
+  <script src="assets/js/lib/data-table/datatables.min.js"></script>
+  <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+  <script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+  <script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+  <script src="assets/js/lib/data-table/jszip.min.js"></script>
+  <script src="assets/js/lib/data-table/vfs_fonts.js"></script>
+  <script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
+  <script src="assets/js/lib/data-table/buttons.print.min.js"></script>
+  <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
+  <script src="assets/js/init/datatables-init.js"></script>
 
 </body>

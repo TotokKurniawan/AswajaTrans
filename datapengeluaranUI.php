@@ -86,7 +86,7 @@ require_once('koneksi.php');
           </li>
 
           <li class="menu-item-">
-            <a href="maps.html" aria-haspopup="true" aria-expanded="false">
+            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
               <i class="menu-icon fa fa-map"></i>Maps</a>
           </li>
           <li class="menu-title">User</li>
@@ -147,7 +147,7 @@ require_once('koneksi.php');
               </a>
 
               <div class="user-menu dropdown-menu">
-              <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
                 <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
@@ -412,7 +412,7 @@ require_once('koneksi.php');
       $("#bootstrap-data-table-export").DataTable();
     });
   </script>
-  
+
   <?php if (@$_SESSION['insertdatapengeluaran']) { ?>
     <script>
       Swal.fire({
