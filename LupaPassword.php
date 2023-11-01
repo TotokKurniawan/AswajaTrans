@@ -143,7 +143,7 @@ if (isset($_POST['simpan'])) {
                       </div>
                     </div>
                     <div class="form-group">
-                      <input name="simpan" class="btn btn-lg btn-primary btn-block" value="Find Username" type="submit" />
+                      <input name="simpan" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit" />
                     </div>
                     <input type="hidden" class="hide" name="token" id="token" value="" />
                   </form>
