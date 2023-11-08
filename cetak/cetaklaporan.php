@@ -26,7 +26,7 @@
 
 <body onload="window.print();">
 
-<div class="wrapper">
+  <div class="wrapper">
     <!-- Main content -->
     <section class="invoice">
       <!-- title row -->
@@ -45,7 +45,7 @@
         <div class="col-xs-12 table-responsive table-bordered">
           <?php
           include '../koneksi.php';
-          include 'C:\xampp\htdocs\AswajaTrans\fungsi\funct.php';
+          include '../fungsi/funct.php';
           $id_Sewa = $_GET['id_Sewa']; // Ambil id_Sewa dari URL
           $sql = mysqli_query($conn, "SELECT sewa.*, mobil.MerkMobil, detail_sewa.Tgl_Kembali
           FROM sewa
@@ -110,9 +110,10 @@
       </div>
       <!-- /.row -->
       <!-- /.row -->
-  
+
     </section>
-    
-  <!-- ./wrapper -->
+
+    <!-- ./wrapper -->
 </body>
+
 </html>
