@@ -88,11 +88,22 @@
           <!-- /.menu-title -->
 
           <li class="menu-item">
-            <a href="#" onclick="logoutConfirmation();">
+            <a href="" onclick="logoutConfirmation();">
               <i class="menu-icon fa fa-sign-out"></i>
               <span class="menu-text" style="color: red;">Logout</span>
             </a>
           </li>
+
+          <script>
+            function logoutConfirmation() {
+              var confirmation = confirm("Apakah Anda yakin ingin logout?");
+
+              if (confirmation) {
+                window.location.href = "index.php";
+              } else {}
+            }
+          </script>
+
         </ul>
       </div>
       <!-- /.navbar-collapse -->

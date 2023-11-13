@@ -16,11 +16,10 @@ if (isset($_POST['update'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        $_SESSION["editdatuser"] = 'Data Berhasil Diubah';
-        header('Location: ../datauserUI.php');
+        $_SESSION["myprofile"] = 'Data Berhasil Diubah';
+        header('Location: ../profile.php');
     } else {
-        $_SESSION["eroreditdatuser"] = 'Data Gagal Diubah';
+        $_SESSION["myprofileerror"] = 'Data Gagal Diubah';
         echo "Error: " . mysqli_error($conn);
     }
 }
-?>

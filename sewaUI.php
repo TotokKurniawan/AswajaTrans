@@ -267,7 +267,8 @@ mysqli_close($conn);
                     <label class=" form-control-label">Bayar DP Mobil</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                      <input class="form-control" name="bayar" id="bayar">
+                      <input class="form-control" id="bayar" oninput="validateInput(this)">
+                      <input type="hidden" class="form-control" name="bayar" id="bayar1">
                     </div>
                   </div>
 
@@ -286,7 +287,7 @@ mysqli_close($conn);
                   <label class=" form-control-label">Total Sewa Mobil</label>
                   <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
-                    <input class="form-control" name="totsewa" id="totsew">
+                    <input class="form-control" name="totsewa" id="totsew" oninput="setDpMobil();">
                   </div>
                 </div>
                 
@@ -354,15 +355,6 @@ mysqli_close($conn);
                     </div>
                   </div>
 
-                  <!-- Tambahkan kode JavaScript di sini untuk mengatur harga setelah memilih nopol -->
-                  <script>
-                    document.getElementById('nopol').addEventListener('change', function() {
-                      var selectedNopol = this.value;
-                      var hargaData = <?php echo json_encode($_SESSION['harga_data']); ?>;
-                      document.getElementById('harga').value = hargaData[selectedNopol] || '';
-                    });
-                  </script>
-
                   <div class="form-group">
                     <label class="form-control-label">Tanggal Kembali</label>
                     <div class="input-group">
@@ -396,10 +388,11 @@ mysqli_close($conn);
                     <label class=" form-control-label">Sisa Bayar</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                      <input class="form-control" name="sisa" id="sisa">
+                      <input class="form-control" id="sisa" readonly>
+                      <input type="hidden" class="form-control" name="sisa" id="sisa1" readonly>
                     </div>
                   </div>
-                  <input type="submit" name="insert" id="insert" value="Simpan Detail" class="btn btn-success" onMouseOver="this.style.backgroundColor=' #00796b'" onMouseOut="this.style.backgroundColor='#4CAF50'" onclick="showSuccessPopup()" />
+                  <input type="submit" name="insert" id="insert" value="Simpan Detail" class="btn btn-success" onMouseOver="this.style.backgroundColor=' #00796b'" onMouseOut="this.style.backgroundColor='#4CAF50'" onclick="" />
                 </div>
               </form>
             </div>
@@ -449,11 +442,64 @@ mysqli_close($conn);
   <!-- Script SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+  <!-- Tambahkan kode JavaScript di sini untuk mengatur harga setelah memilih nopol -->
+  <script>
+    document.getElementById('nopol').addEventListener('change', function() {
+      var dpMobil = JSON.parse(localStorage.getItem('data'))
+      const sisaBayar = document.getElementById('sisa')
+      const sisaBayar1 = document.getElementById('sisa1')
+      var selectedNopol = this.value;
+      var hargaData = <?php echo json_encode($_SESSION['harga_data']); ?>;
+      var hargaMobil = document.getElementById('harga').value = hargaData[selectedNopol] || '';
+      var hasil = hargaMobil - dpMobil;
+      sisaBayar1.value = hasil
+
+      var format = hasil.toLocaleString('id-ID', {
+        style: 'currency',
+        currency: 'IDR'
+      });
+
+      if (dpMobil > hargaMobil) {
+        sisaBayar.value = 0;
+      } else {
+        sisaBayar.value = format;
+      }
+      console.log(dpMobil);
+    });
+  </script>
+
 
   <script type="text/javascript">
     $(document).ready(function() {
       $("#bootstrap-data-table-export").DataTable();
     });
+
+    function setDpMobil() {
+      if (localStorage.getItem('data') == null) {
+        localStorage.setItem('data', '[]');
+      }
+      const bayar = document.getElementById('bayar').value;
+      const bayar1 = document.getElementById('bayar1');
+      let penyimpanan = JSON.parse(localStorage.getItem('data'));
+      var uang = parseInt(bayar.replace(/,/g, ''), 10);
+
+      bayar1.value = uang;
+      // console.log(uang);
+      penyimpanan.push(uang);
+      localStorage.setItem('data', JSON.stringify(penyimpanan));
+    }
+
+
+    function validateInput(input) {
+      // input.value = input.value.replace(/\D/g, "");
+      var value = input.value.replace(/[^0-9]/g, '');
+
+      if (value) {
+        value = parseInt(value, 10).toLocaleString('en-US');
+      }
+
+      input.value = value;
+    }
   </script>
 </body>
 <?php if (@$_SESSION['insertsewa']) { ?>

@@ -4,6 +4,7 @@ require_once('koneksi.php');
 
 if (isset($_POST['submit'])) {
   $username = $_POST['Username'];
+  $_SESSION['username'] = $username;
   $password = $_POST['Password'];
 
   if (!empty($username) && !empty($password)) {
@@ -45,9 +46,9 @@ if (isset($_POST['submit'])) {
       <h1>Login Here</h1>
       <form action="login.php" method="POST">
         <p>Username</p>
-        <input type="text" name="Username" placeholder="Masukan Username" />
+        <input type="text" required name="Username" placeholder="Masukan Username" />
         <p>Password</p>
-        <input type="password" name="Password" placeholder="Masukan Password" />
+        <input type="password" required name="Password" placeholder="Masukan Password" />
         <input class="btn-hover color" type="submit" name="submit" value="Login" />
         <a style="color:aqua" href="LupaPassword.php">Forgot Password</a></span>
         <!-- <span class="top"></span>

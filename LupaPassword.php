@@ -145,7 +145,7 @@ if (isset($_POST['simpan'])) {
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user color-blue"></i></span>
-                        <input id="username" name="username" placeholder="username" class="form-control" />
+                        <input id="username" required name="username" placeholder="username" class="form-control" />
                       </div>
                     </div>
                     <div class="form-group">
@@ -163,22 +163,22 @@ if (isset($_POST['simpan'])) {
                     </div>
                     <div class="form-group">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user color-blue"></i></span>
-                        <input id="jawab" name="jawab" placeholder="Jawaban Hint" class="form-control" />
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign color-blue"></i></span>
+                        <input id="jawab" required name="jawab" placeholder="Jawaban Hint" class="form-control" />
                       </div>
+
                     </div>
                     <div class="form-group">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user color-blue"></i></span>
-                        <input id="pass" name="pass" type="Password" placeholder="Password" class="form-control" />
-                      </div>
-                    </div>
-                    <div class="g-recaptcha" data-sitekey="6LfdS9soAAAAAOAdcVgAueix-VUO_kc0sYh-3aCV"></div>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock color-blue"></i></span>
+                        <input id="pass" required name="pass" type="password" placeholder="Password" class="form-control" />
+                      </div><br>
+                      <div class="g-recaptcha" data-sitekey="6LfdS9soAAAAAOAdcVgAueix-VUO_kc0sYh-3aCV"></div><br>
 
-                    <div class="form-group">
-                      <input name="simpan" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit" />
-                    </div>
-                    <input type="hidden" class="hide" name="token" id="token" value="" />
+                      <div class="form-group">
+                        <input name="simpan" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit" />
+                      </div>
+                      <input type="hidden" class="hide" name="token" id="token" value="" />
                   </form>
                 </div>
               </div>
