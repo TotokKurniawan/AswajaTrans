@@ -84,14 +84,11 @@
             <a href="maps.php" aria-haspopup="true" aria-expanded="false">
               <i class="menu-icon fa fa-map"></i>Maps</a>
           </li>
-          <li class="menu-title">User</li>
+          <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
+
           <li class="menu-item">
-            <a href="datauserUI.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-glass"></i>Data User</a>
-          </li>
-          <li class="menu-item">
-            <a href="login.php" aria-haspopup="true" aria-expanded="false">
+            <a href="#" onclick="logoutConfirmation();">
               <i class="menu-icon fa fa-sign-out"></i>
               <span class="menu-text" style="color: red;">Logout</span>
             </a>
@@ -176,38 +173,11 @@
             </div>
             <!-- /# card -->
           </div>
-          <!-- /# column -->
-
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header">
-                <h4>Mobil 1</h4>
-              </div>
-              <div class="card-body">
-                <div class="map" id="map-5"></div>
-              </div>
-            </div>
-            <!-- /# card -->
-          </div>
-          <!-- /# column -->
-
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header">
-                <h4>Mobil 2</h4>
-              </div>
-              <div class="card-body">
-                <div id="map-6" class="map"></div>
-              </div>
-            </div>
-            <!-- /# card -->
-          </div>
-          <!-- /# column -->
         </div>
-        <!-- /# row -->
       </div>
-      <!-- .animated -->
     </div>
+    <!-- /# column -->
+
     <!-- .content -->
     <div class="clearfix"></div>
 

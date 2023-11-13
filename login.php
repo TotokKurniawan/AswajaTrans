@@ -13,10 +13,10 @@ if (isset($_POST['submit'])) {
 
     if ($datas && password_verify($password, $datas['password'])) {
       // Login berhasil, tampilkan SweetAlert2 berhasil
-    	$_SESSION["login"] = 'Anda Berhasil Login';
+      $_SESSION["login"] = 'Anda Berhasil Login';
       header("Location: admin.php");
     } else {
-    	$_SESSION["erorr"] = 'Login Gagal';
+      $_SESSION["erorr"] = 'Login Gagal';
       // Login gagal, tampilkan SweetAlert2 gagal
     }
   }
@@ -48,8 +48,7 @@ if (isset($_POST['submit'])) {
         <input type="text" name="Username" placeholder="Masukan Username" />
         <p>Password</p>
         <input type="password" name="Password" placeholder="Masukan Password" />
-        <input class="btn-hover color" type="submit" name="submit" value="Login" " />
-        <a style="color:aqua;" href="registrasi.php">Sign In</a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="btn-hover color" type="submit" name="submit" value="Login" />
         <a style="color:aqua" href="LupaPassword.php">Forgot Password</a></span>
         <!-- <span class="top"></span>
         <span class="right"></span>
@@ -59,22 +58,22 @@ if (isset($_POST['submit'])) {
     </div>
   </section>
   <script src="sweetallert/sweetalert2.min.js"></script>
-  
+
 </body>
 <?php if (@$_SESSION['sukses']) { ?>
-    <script>
-      Swal.fire({
-        icon: 'success',
-        title: 'Sukses',
-        text: 'Registrasi Anda Berhasil',
-        timer: 2000,
-        showConfirmButton: false
-      });
-    </script>
-    <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-  <?php unset($_SESSION['sukses']);
-  } ?>
-  <?php if (@$_SESSION['luppus']) { ?>
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Sukses',
+      text: 'Registrasi Anda Berhasil',
+      timer: 2000,
+      showConfirmButton: false
+    });
+  </script>
+  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+<?php unset($_SESSION['sukses']);
+} ?>
+<?php if (@$_SESSION['luppus']) { ?>
   <script>
     Swal.fire({
       icon: 'success',
@@ -87,18 +86,18 @@ if (isset($_POST['submit'])) {
   <!-- agar sweet alert tidak muncul lagi saat di refresh -->
 <?php unset($_SESSION['luppus']);
 } ?>
- <?php if (@$_SESSION['erorr']) { ?>
-          <script>
-            Swal.fire({
-              icon: 'eror',
-              title: 'Gagal',
-              text: 'Login Gagal',
-              timer: 2000,
-              showConfirmButton: false
-            });
-          </script>
-          <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-        <?php unset($_SESSION['erorr']);
-        } ?>
+<?php if (@$_SESSION['erorr']) { ?>
+  <script>
+    Swal.fire({
+      icon: 'eror',
+      title: 'Gagal',
+      text: 'Login Gagal',
+      timer: 2000,
+      showConfirmButton: false
+    });
+  </script>
+  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+<?php unset($_SESSION['erorr']);
+} ?>
 
 </html>

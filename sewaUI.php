@@ -119,19 +119,15 @@ mysqli_close($conn);
             <a href="maps.php" aria-haspopup="true" aria-expanded="false">
               <i class="menu-icon fa fa-map"></i>Maps</a>
           </li>
-          <li class="menu-title">User</li>
+          <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
+
           <li class="menu-item">
-            <a href="datauserUI.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-glass"></i>Data User</a>
-          </li>
-          <li class="menu-item">
-            <a href="login.php" onclick="logoutConfirmation();">
+            <a href="#" onclick="logoutConfirmation();">
               <i class="menu-icon fa fa-sign-out"></i>
               <span class="menu-text" style="color: red;">Logout</span>
             </a>
           </li>
-
           <script>
             function logoutConfirmation() {
               var confirmation = confirm("Apakah Anda yakin ingin logout?");
@@ -268,7 +264,7 @@ mysqli_close($conn);
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class=" form-control-label">Bayar</label>
+                    <label class=" form-control-label">Bayar DP Mobil</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-usd"></i></div>
                       <input class="form-control" name="bayar" id="bayar">
@@ -287,7 +283,7 @@ mysqli_close($conn);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class=" form-control-label">Total Sewa</label>
+                  <label class=" form-control-label">Total Sewa Mobil</label>
                   <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
                     <input class="form-control" name="totsewa" id="totsew">

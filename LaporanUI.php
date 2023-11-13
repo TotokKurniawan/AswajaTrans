@@ -84,14 +84,11 @@
             <a href="maps.php" aria-haspopup="true" aria-expanded="false">
               <i class="menu-icon fa fa-map"></i>Maps</a>
           </li>
-          <li class="menu-title">User</li>
+          <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
+
           <li class="menu-item">
-            <a href="datauserUI.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-glass"></i>Data User</a>
-          </li>
-          <li class="menu-item">
-            <a href="login.php" onclick="logoutConfirmation();">
+            <a href="#" onclick="logoutConfirmation();">
               <i class="menu-icon fa fa-sign-out"></i>
               <span class="menu-text" style="color: red;">Logout</span>
             </a>

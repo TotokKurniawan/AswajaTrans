@@ -31,61 +31,59 @@
     </div>
 
     <script>
-    $(document).ready(function () {
-        showGraph();
-    });
+        $(document).ready(function() {
+            showGraph();
+        });
 
-    function showGraph() {
-        {
-            $.post("bar_encode.php",
-                function (data) {
-                    console.log(data);
+        function showGraph() {
+            {
+                $.post("bar_encode.php",
+                    function(data) {
+                        console.log(data);
 
-                    // Daftar bulan lengkap
-                    var allMonths = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                        // Daftar bulan lengkap
+                        var allMonths = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-                    var labels = [];
-                    var values = [];
+                        var labels = [];
+                        var values = [];
 
-                    // Inisialisasi objek untuk menyimpan data bulan
-                    var monthData = {};
+                        // Inisialisasi objek untuk menyimpan data bulan
+                        var monthData = {};
 
-                    // Memasukkan data yang diterima ke dalam objek monthData
-                    for (var i in data) {
-                        var month = data[i].bulan;
-                        monthData[month] = data[i].jumlah_id;
-                    }
+                        // Memasukkan data yang diterima ke dalam objek monthData
+                        for (var i in data) {
+                            var month = data[i].bulan;
+                            monthData[month] = data[i].jumlah_id;
+                        }
 
-                    // Loop melalui daftar bulan lengkap dan buat label dan data
-                    for (var i = 1; i <= 12; i++) {
-                        labels.push(allMonths[i - 1]);  // Menambahkan nama bulan ke dalam label
-                        values.push(monthData[i] || 0);  // Menambahkan jumlah id_Sewa atau 0 jika data tidak ada
-                    }
+                        // Loop melalui daftar bulan lengkap dan buat label dan data
+                        for (var i = 1; i <= 12; i++) {
+                            labels.push(allMonths[i - 1]); // Menambahkan nama bulan ke dalam label
+                            values.push(monthData[i] || 0); // Menambahkan jumlah id_Sewa atau 0 jika data tidak ada
+                        }
 
-                    var chartdata = {
-                        labels: labels,
-                        datasets: [
-                            {
+                        var chartdata = {
+                            labels: labels,
+                            datasets: [{
                                 label: 'TOTAL SEWA',
                                 backgroundColor: '#49e2ff',
                                 borderColor: '#46d5f1',
                                 hoverBackgroundColor: '#CCCCCC',
                                 hoverBorderColor: '#666666',
                                 data: values
-                            }
-                        ]
-                    };
+                            }]
+                        };
 
-                    var graphTarget = $('#graphCanvas');
+                        var graphTarget = $('#graphCanvas');
 
-                    var barGraph = new Chart(graphTarget, {
-                        type: 'bar',
-                        data: chartdata
-                    });
-                }, "json");
+                        var barGraph = new Chart(graphTarget, {
+                            type: 'bar',
+                            data: chartdata
+                        });
+                    }, "json");
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
 

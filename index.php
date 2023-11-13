@@ -57,9 +57,6 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
-      <a href="login.php" class="get-started-btn scrollto">Login</a>
-
     </div>
   </header><!-- End Header -->
 
@@ -69,7 +66,7 @@
 
       <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
         <div class="col-xl-6 col-lg-8">
-          <h1 >ASWAJA TRANS</h1>
+          <h1>ASWAJA TRANS</h1>
           <h2>Easy Travels With Us</h2>
         </div>
       </div>
@@ -128,6 +125,9 @@
             </ul>
             <p>
               Aswaja Trans ini berlokasi di Jl. Kelud, Ketapang, Kec. Kademangan, Kota Probolinggo, Jawa Timur 67222.
+            </p>
+            <p>
+              Jika Anda Adalah Admin <a href="login.php"> Klik Disini!!!</a>
             </p>
           </div>
         </div>
@@ -311,7 +311,7 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <p>- <span>Agus Harianto </span>-</p>
-              
+
               </div>
             </div><!-- End testimonial item -->
 
@@ -323,7 +323,7 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <p>- <span>Wulan Handayani</span>-</p>
-              
+
               </div>
             </div><!-- End testimonial item -->
 
@@ -335,7 +335,7 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <p>- <span>Teguh Ristianto</span>-</p>
-              
+
               </div>
             </div><!-- End testimonial item -->
 
