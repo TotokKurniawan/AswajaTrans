@@ -142,7 +142,7 @@ session_start();
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="datauserUI.php"><i class="fa fa- user"></i>My Profile</a>
+                <a class="nav-link" href="profile.php"><i class="fa fa- user"></i>My Profile</a>
                 <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
               </div>
             </div>
