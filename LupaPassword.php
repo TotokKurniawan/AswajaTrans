@@ -1,31 +1,62 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <?php
-session_start();
-require_once('koneksi.php');
+session_start(); // Pastikan session sudah dimulai
+require_once("koneksi.php");
 
 if (isset($_POST['simpan'])) {
+  // Periksa apakah reCAPTCHA telah diverifikasi
+  $recaptchaSecret = "6LfdS9soAAAAABAyMyMXjUX9EhDtL7tNHTv0aEzZ";
+
+  if (isset($_POST['g-recaptcha-response'])) {
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+    $recaptchaResponse = json_decode($verify);
+
+    if (!$recaptchaResponse->success) {
+      // Jika reCAPTCHA gagal, tampilkan pesan kesalahan
+      $_SESSION["captcha"] = 'Verifikasi reCAPTCHA gagal. Anda mungkin adalah robot. Silakan coba lagi.';
+      header("Location: halaman_error.php");
+      exit();
+    }
+  } else {
+    // Jika respons reCAPTCHA tidak ada
+    $_SESSION["captcha"] = 'Verifikasi reCAPTCHA tidak valid. Silakan coba lagi.';
+    header("Location: halaman_error.php");
+    exit();
+  }
+
+  // Periksa apakah semua data yang diperlukan diisi dengan benar
   $username = $_POST['username'];
   $hint = $_POST['hint'];
   $jawab = $_POST['jawab'];
   $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Hash the password for security
 
-  $querycari = "SELECT * FROM user WHERE Username = '$username' AND Hint = '$hint' AND JawabanHint = '$jawab'";
-  $resultcari = mysqli_query($conn, $querycari);
+  if (!empty($username) && !empty($hint) && !empty($jawab)) {
+    // Proses pemulihan kata sandi
+    $querycari = "SELECT * FROM user WHERE Username = '$username' AND Hint = '$hint' AND JawabanHint = '$jawab'";
+    $resultcari = mysqli_query($conn, $querycari);
 
-  if (mysqli_num_rows($resultcari) == 1) {
-    // User found, update the password
-    $queryUpdate = "UPDATE user SET Password = '$pass' WHERE Username = '$username'";
-    $resultUpdate = mysqli_query($conn, $queryUpdate);
+    if (mysqli_num_rows($resultcari) == 1) {
+      // User found, update the password
+      $queryUpdate = "UPDATE user SET Password = '$pass' WHERE Username = '$username'";
+      $resultUpdate = mysqli_query($conn, $queryUpdate);
 
-    if ($resultUpdate) {
-      // Password updated successfully
-      $_SESSION['luppus'] = 'Password Berhasil Diubah';
-      header("Location: login.php");
-      exit();
+      if ($resultUpdate) {
+        // Password updated successfully
+        $_SESSION['luppus'] = 'Password Berhasil Diubah';
+        header("Location: login.php");
+        exit();
+      } else {
+        $_SESSION["luput"] = 'Gagal mengupdate kata sandi';
+      }
     } else {
-      $_SESSION["error"] = 'Gagal mengupdate kata sandi';
+      $_SESSION["luput"] = 'Username Tidak Ditemukan atau jawaban hint salah';
     }
   } else {
-    $_SESSION["error"] = 'Username Tidak Ditemukan atau jawaban hint salah';
+    $_SESSION["luput"] = 'Semua data harus diisi';
+    header("Location: halaman_error.php");
+    exit();
   }
 }
 ?>
@@ -142,6 +173,8 @@ if (isset($_POST['simpan'])) {
                         <input id="pass" name="pass" type="Password" placeholder="Password" class="form-control" />
                       </div>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6LfdS9soAAAAAOAdcVgAueix-VUO_kc0sYh-3aCV"></div>
+
                     <div class="form-group">
                       <input name="simpan" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit" />
                     </div>
@@ -170,6 +203,21 @@ if (isset($_POST['simpan'])) {
   </script>
   <!-- agar sweet alert tidak muncul lagi saat di refresh -->
 <?php unset($_SESSION['luput']);
+}
+?>
+
+<?php if (@$_SESSION['captcha ']) { ?>
+  <script>
+    Swal.fire({
+      icon: 'eror',
+      title: 'Gagal',
+      text: 'Verifikasi Captcha Anda Gagal',
+      timer: 2000,
+      showConfirmButton: false
+    });
+  </script>
+  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+<?php unset($_SESSION['captcha']);
 } ?>
 
 </html>
