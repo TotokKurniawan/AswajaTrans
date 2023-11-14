@@ -194,10 +194,10 @@ require_once("koneksi.php");
                     <tr>
                       <th>No</th>
                       <th>NIK</th>
-                      <th>Nama Pelanggan</th>
+                      <th>N.Pelanggan</th>
                       <th>No Telpon</th>
                       <th>Alamat</th>
-                      <th>
+                      <th style="width: 20%;">
                         <center>Action</center>
                       </th>
                     </tr>

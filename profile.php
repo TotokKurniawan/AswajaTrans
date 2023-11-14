@@ -22,9 +22,6 @@ if ($result) {
     die("Error: " . $sql . "<br>" . mysqli_error($conn));
 }
 
-// Close the statement and the database connection
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -265,46 +262,6 @@ mysqli_close($conn);
                 <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
                 <script src="assets/js/init/datatables-init.js"></script>
 
-                <!-- Modal for Editing -->
-                <div class="modal fade" id="editModal<?php echo $userData['Username']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Edit Data Admin</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="edit/edituser.php" method="post" id="edit_form" enctype='multipart/form-data'>
-                                    <input type="text" name="id" value="<?php echo $userData['id']; ?>" hidden />
-                                    <br />
-                                    <label>Full Name</label>
-                                    <input type="text" name="name" value="<?php echo $userData['Nama']; ?>" class="form-control" />
-                                    <br />
-                                    <label>Username</label>
-                                    <input type="text" name="usera" value="<?php echo $userData['Username']; ?>" class="form-control" />
-                                    <br />
-                                    <label>Hint</label>
-                                    <select class="form-control" name="hint">
-                                        <option value="">Choose One Hint</option>
-                                        <option value="Siapa Nama Ayahmu ??">Siapa Nama Ayahmu ?? </option>
-                                        <option value="Siapa Nama Ibumu ??">Siapa Nama Ibumu ??</option>
-                                        <option value="Apa Warna Kesukaanmu ??">Apa Warna Kesukaanmu ??</option>
-                                        <option value="Apa Makanan Kesukaanmu ??">Apa Makanan Kesukaanmu ??</option>
-                                        <!-- Tambahkan pilihan lainnya sesuai kebutuhan Anda -->
-                                    </select>
-                                    <br />
-                                    <label>Jawaban Hint</label>
-                                    <input type="text" name="jawab" value="<?php echo $userData['JawabanHint']; ?>" class="form-control" />
-                                    <br />
-                                    <label>Password</label>
-                                    <input type="password" name="pass" placeholder="*********" class="form-control" />
-                                    <br />
-                                    <input type="submit" name="update" value="Save" class="btn btn-success" />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 </body>
 <?php if (@$_SESSION['myprofile']) { ?>
@@ -336,3 +293,48 @@ mysqli_close($conn);
 } ?>
 
 </html>
+<!-- Modal for Editing -->
+<div class="modal fade" id="editModal<?php echo $userData['Username']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Data Admin</h4>
+            </div>
+            <div class="modal-body">
+                <form action="edit/edituser.php" method="post" enctype="multipart/form-data">
+                    <input type="text" name="id" value="<?php echo $userData['id']; ?>" hidden />
+                    <label>Full Name</label>
+                    <input type="text" name="name" value="<?php echo $userData['Nama']; ?>" class="form-control" />
+                    <br />
+                    <label>Username</label>
+                    <input type="text" name="usera" value="<?php echo $userData['Username']; ?>" class="form-control" />
+                    <br />
+                    <label>Hint</label>
+                    <select class="form-control" name="hint">
+                        <option value="">Choose One Hint</option>
+                        <option value="Siapa Nama Ayahmu ??">Siapa Nama Ayahmu ?? </option>
+                        <option value="Siapa Nama Ibumu ??">Siapa Nama Ibumu ??</option>
+                        <option value="Apa Warna Kesukaanmu ??">Apa Warna Kesukaanmu ??</option>
+                        <option value="Apa Makanan Kesukaanmu ??">Apa Makanan Kesukaanmu ??</option>
+                        <!-- Tambahkan pilihan lainnya sesuai kebutuhan Anda -->
+                    </select>
+                    <br />
+                    <label>Jawaban Hint</label>
+                    <input type="text" name="jawab" value="<?php echo $userData['JawabanHint']; ?>" class="form-control" />
+                    <br />
+                    <label>Password</label>
+                    <input type="password" name="pass" placeholder="*********" class="form-control" />
+                    <br />
+                    <label for="foto">Foto Profil</label><br>
+                    <input type="file" name="foto" id="foto"><br />
+                    <br>
+                    <input type="submit" name="update" value="Save" class="btn btn-success" />
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onMouseOver="this.style.backgroundColor='#ff6666'" onMouseOut="this.style.backgroundColor='white'" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
