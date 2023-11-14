@@ -267,7 +267,7 @@ mysqli_close($conn);
                     <label class=" form-control-label">Bayar DP Mobil</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                      <input class="form-control" id="bayar" oninput="validateInput(this)">
+                      <input class="form-control" required id="bayar" oninput="validateInput(this)">
                       <input type="hidden" class="form-control" name="bayar" id="bayar1">
                     </div>
                   </div>
@@ -277,17 +277,16 @@ mysqli_close($conn);
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                       <select class="form-control" name="stbyar" id="stbyar' . $row[" Nopol"] . '">
-                                  <option value="Lunas">Lunas</option>
-                                  <option value="Kurang" >Kurang</option>
-                                  <!-- Tambahkan pilihan lainnya sesuai kebutuhan Anda -->
-                                </select>
+                        <option value="Kurang" >Kurang</option>
+                        <option value="Lunas">Lunas</option>
+                      </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class=" form-control-label">Total Sewa Mobil</label>
                   <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
-                    <input class="form-control" name="totsewa" id="totsew" oninput="setDpMobil();">
+                    <input class="form-control" required name="totsewa" id="totsew" oninput="setDpMobil();">
                   </div>
                 </div>
                 
@@ -366,7 +365,7 @@ mysqli_close($conn);
                     <label class=" form-control-label">Lama Pinjam</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                      <input class="form-control" name="lamapinjam" id="lamapinjam">
+                      <input class="form-control" required name="lamapinjam" id="lamapinjam">
 
                     </div>
                   </div>
@@ -374,21 +373,21 @@ mysqli_close($conn);
                     <label class=" form-control-label">Subtotal</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
-                      <input class="form-control" name="subtotal" id="subtotal">
+                      <input class="form-control" required name="subtotal" id="subtotal">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class=" form-control-label">Total Harga</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
-                      <input class="form-control" name="tothar" id="tothar">
+                      <input class="form-control" required name="tothar" id="tothar">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class=" form-control-label">Sisa Bayar</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                      <input class="form-control" id="sisa" readonly>
+                      <input class="form-control" required id="sisa" readonly>
                       <input type="hidden" class="form-control" name="sisa" id="sisa1" readonly>
                     </div>
                   </div>
@@ -397,10 +396,6 @@ mysqli_close($conn);
               </form>
             </div>
           </div>
-
-
-
-
         </div>
 
 

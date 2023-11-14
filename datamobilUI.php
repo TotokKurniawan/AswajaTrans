@@ -1,5 +1,6 @@
 <?php
-session_start(); ?>
+session_start();
+require_once("koneksi.php") ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -202,19 +203,6 @@ session_start(); ?>
                   </thead>
                   <tbody>
                     <?php
-                    // Menghubungkan ke database (gantilah dengan informasi koneksi Anda)
-                    $db_host = 'localhost';
-                    $db_user = 'root';
-                    $db_pass = '';
-                    $db_name = 'aswajatrans2';
-
-                    $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-                    if (!$conn) {
-                      die("Koneksi ke database gagal: " . mysqli_connect_error());
-                    }
-
-                    // Query SQL untuk mengambil data mobil
                     $sql = "SELECT * FROM mobil ORDER BY merkmobil ASC";
                     $result = mysqli_query($conn, $sql);
 
@@ -226,21 +214,23 @@ session_start(); ?>
                         echo "<td>" . $row['Nopol'] . "</td>";
                         echo "<td>" . $row['MerkMobil'] . "</td>";
                         echo "<td>" . $row['TypeMobil'] . "</td>";
-                        echo "<td>" . $row['harga'] . "</td>";
+
+                        echo "<td>Rp " . number_format($row['harga'], 0, ',', '.') . "</td>";
+
                         echo "<td>" . $row['Status'] . "</td>";
                         echo '<td>
-                    <center>
-                        <a type="button" name="edit" value="Edit" data-toggle="modal"
-                            data-target="#editModal' . $row["Nopol"] . '" title="Edit Data ini"
-                            class="btn btn-sm" style="background: darkslateblue;color:white;"><i
-                                class="fa fa-edit "></i>
-                            Edit
-                        </a>
-                        <a href="hapus/hapusmobil.php?id=' . $row['Nopol'] . '&reqkarya=dell" title="Hapus Simpanan" class="btn btn-danger btn-sm alert_notif">
-                            <span class="fa fa-trash-o"> Hapus</span>
-                        </a>
-                    </center>
-                </td>';
+            <center>
+                <a type="button" name="edit" value="Edit" data-toggle="modal"
+                    data-target="#editModal' . $row["Nopol"] . '" title="Edit Data ini"
+                    class="btn btn-sm" style="background: darkslateblue;color:white;"><i
+                        class="fa fa-edit "></i>
+                    Edit
+                </a>
+                <a href="hapus/hapusmobil.php?id=' . $row['Nopol'] . '&reqkarya=dell" title="Hapus Simpanan" class="btn btn-danger btn-sm alert_notif">
+                    <span class="fa fa-trash-o"> Hapus</span>
+                </a>
+            </center>
+        </td>';
                         echo "</tr>";
                         $no++;
                       }
@@ -251,6 +241,7 @@ session_start(); ?>
                     // Tutup koneksi ke database
                     mysqli_close($conn);
                     ?>
+
                     <?php
                     // Menampilkan modal edit untuk setiap data mobil
                     if ($result) {
@@ -266,16 +257,16 @@ session_start(); ?>
                             <div class="modal-body">
                               <form action="edit/editmobil.php" method="post" id="update' . $row["Nopol"] . '" enctype="multipart/form-data">
                                 <label >Nopol</label>
-                                <input type="text" value="' . $row["Nopol"] . '" name="nopol" id="nopol' . $row["Nopol"] . '" class="form-control" readonly>
+                                <input required type="text" value="' . $row["Nopol"] . '" name="nopol" id="nopol' . $row["Nopol"] . '" class="form-control" readonly>
                                 <br>
                                 <label>Merk Mobil</label>
-                                <input type="text" name="merk" id="merk' . $row["Nopol"] . '" value="' . $row["MerkMobil"] . '" class="form-control" />
+                                <input type="text" required name="merk" id="merk' . $row["Nopol"] . '" value="' . $row["MerkMobil"] . '" class="form-control" />
                                 <br />
                                 <label>Type Mobil</label>
-                                <input type="text" name="type" id="type' . $row["Nopol"] . '" value="' . $row["TypeMobil"] . '" class="form-control" />
+                                <input type="text" required name="type" id="type' . $row["Nopol"] . '" value="' . $row["TypeMobil"] . '" class="form-control" />
                                 <br />
                                 <label>Harga</label>
-                                <input type="number" name="harga" id="harga' . $row["Nopol"] . '" value="' . $row["harga"] . '" class="form-control" />
+                                <input type="number" required name="harga" id="harga' . $row["Nopol"] . '" value="' . $row["harga"] . '" class="form-control" />
                                 <br />
                                 <label>Status</label>
                                 <select class="form-control" name="st" id="st' . $row["Nopol"] . '">
@@ -459,17 +450,18 @@ session_start(); ?>
         <form action="insert/insertMobil.php" method="post" id="insert_form" enctype='multipart/form-data'>
 
           <label>Nopol</label>
-          <input type="text" name="nopol" id="nopol" class="form-control" />
+          <input type="text" required name="nopol" id="nopol" class="form-control" />
           <br />
           <label>Merk Mobil</label>
-          <input type="text" name="merk" id="merk" class="form-control" />
+          <input type="text" required name="merk" id="merk" class="form-control" />
           <br />
           <label>Type Mobil</label>
-          <input type="text" name="type" id="type" class="form-control">
+          <input type="text" required name="type" id="type" class="form-control">
           <br />
           <label>Harga</label>
-          <input type="text" name="harga" id="harga" class="form-control" />
+          <input type="number" required name="harga" id="harga" class="form-control" />
           <br />
+          <label>Status</label>
           <div class="form-holder">
             <span class="lnr lnr-question-circle"></span>
             <select class="form-control" name="St">

@@ -33,7 +33,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> ASWAJA TRANS TOUR AND TRAVELS
+            <i class="fa fa-globe"></i> ASWAJA TRANS
             <small class="pull-right">Tanggal: <?php echo date('d F Y'); ?></small>
           </h2>
         </div>
@@ -59,10 +59,10 @@
             exit; // Keluar dari script
           }
           ?>
-          <table class="table table-striped table-responsive">
+          <table class="table table-striped table-responsive" border="1">
             <thead>
               <tr class="warning">
-                <th style="font-size:12px;">
+                <th style="font-size:12px; ">
                   <center>Kode Struk</center>
                 </th>
                 <th style="font-size:12px;">

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("koneksi.php");
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -213,19 +214,7 @@ session_start();
                   </thead>
                   <tbody>
                     <?php
-                    // Menghubungkan ke database (gantilah dengan informasi koneksi Anda)
-                    $db_host = 'localhost';
-                    $db_user = 'root';
-                    $db_pass = '';
-                    $db_name = 'aswajatrans2';
 
-                    $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-                    if (!$conn) {
-                      die("Koneksi ke database gagal: " . mysqli_connect_error());
-                    }
-
-                    // Query SQL untuk mengambil data mobil
                     $sql = "SELECT sewa.*, pelanggan.NIK, pelanggan.Nama_Pelanggan, mobil.MerkMobil, detail_sewa.Tgl_Kembali, detail_sewa.Denda, detail_sewa.tanggal_pengembalian, mobil.Status
                     FROM sewa
                     JOIN pelanggan ON pelanggan.NIK = sewa.NIK
@@ -245,10 +234,10 @@ session_start();
                         echo "<td>" . $row['Tgl_Kembali'] . "</td>";
                         echo "<td>" . $row['tanggal_pengembalian'] . "</td>";
                         echo "<td>" . $row['Total_Harga'] . "</td>";
-                        echo "<td>" . $row['bayar'] . "</td>";
-                        echo "<td>" . $row['Sisa yang harus dibayar'] . "</td>";
+                        echo "<td>Rp " . number_format($row['bayar'], 0, ',', '.') . "</td>";
+                        echo "<td>Rp " . number_format($row['Sisa yang harus dibayar'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['StatusBayar'] . "</td>";
-                        echo "<td>" . $row['Denda'] . "</td>";
+                        echo "<td>Rp " . number_format($row['Denda'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['Status'] . "</td>";
                         echo '<td>
                     <center>
@@ -271,9 +260,6 @@ session_start();
                     } else {
                       echo "<tr><td colspan='7'>Tidak ada data mobil.</td></tr>";
                     }
-
-                    // Tutup koneksi ke database
-                    mysqli_close($conn);
                     ?>
                     <?php
                     if ($result) {
@@ -292,13 +278,13 @@ session_start();
                                                   <input type="text" value="' . $row["id_Sewa"] . '" name="id" id="id' . $row["id_Sewa"] . '" class="form-control" readonly>
                                                   <br>
                                                   <label>Total Harga</label>
-                                                  <input type="text" name="total" id="total' . $row["id_Sewa"] . '" value="' . $row["Total_Harga"] . '" class="form-control" readonly />
+                                                  <input type="number" required name="total" id="total' . $row["id_Sewa"] . '" value="' . $row["Total_Harga"] . '" class="form-control" readonly />
                                                   <br />
                                                   <label>Bayar</label>
-                                                  <input type="text" name="bayar" id="bayar' . $row["id_Sewa"] . '" value="' . $row["bayar"] . '" class="form-control" />
+                                                  <input type="number" required name="bayar" id="bayar' . $row["id_Sewa"] . '" value="' . $row["bayar"] . '" class="form-control" />
                                                   <br />
                                                   <label>Sisa Bayar</label>
-                                                  <input type="text" name="sisa" id="sisa' . $row["id_Sewa"] . '" value="' . $row["Sisa yang harus dibayar"] . '" class="form-control" />
+                                                  <input type="number" required name="sisa" id="sisa' . $row["id_Sewa"] . '" value="' . $row["Sisa yang harus dibayar"] . '" class="form-control" />
                                                   <br />
                                                   <label>Status Bayar</label>
                                                   <select class="form-control" name="stbyr" id="stbyr' . $row["id_Sewa"] . '">

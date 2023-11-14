@@ -187,26 +187,10 @@ require_once('koneksi.php');
                 <strong class="card-title">Data Pengeluaran</strong>
               </div>
               <?php
-              // Konfigurasi koneksi ke database
-              $servername = "localhost";
-              $username = "root";
-              $password = "";
-              $database = "aswajatrans2";
 
-              // Membuat koneksi ke database
-              $conn = new mysqli($servername, $username, $password, $database);
-
-              // Memeriksa koneksi
-              if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-              }
-
-              // Query SQL untuk mengambil data pengeluaran
               $sql = "SELECT * FROM pengeluaran ORDER BY id_pengeluaran ASC";
               $result = $conn->query($sql);
-
               ?>
-
               <div class="card-body">
                 <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Pengeluaran" class="btn btn-success" onMouseOver="this.style.backgroundColor='#006064'" onMouseOut="this.style.backgroundColor='#4CAF50'">Tambah Pengeluaran</button>
                 <br><br>
@@ -232,7 +216,7 @@ require_once('koneksi.php');
                         echo "<td>" . $row['id_pengeluaran'] . "</td>";
                         echo "<td>" . $row['Nopol'] . "</td>";
                         echo "<td>" . $row['Tgl_Pengeluaran'] . "</td>";
-                        echo "<td>" . $row['Nominal'] . "</td>";
+                        echo "<td>Rp " . number_format($row['Nominal'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['Keterangan'] . "</td>";
                         echo '<td>
               <center>
@@ -258,19 +242,19 @@ require_once('koneksi.php');
                   <div class="modal-body">
                     <form action="edit/editpengeluaran.php" method="post" id="update' . $row['id_pengeluaran'] . '" enctype="multipart/form-data">
                     <label >Id Pengeluaran</label>  
-                    <input type="text" value="' . $row['id_pengeluaran'] . '" name="id_pengeluaran" id="id_pengeluaran' . $row['id_pengeluaran'] . '" class="form-control" readonly>
+                    <input type="text" required value="' . $row['id_pengeluaran'] . '" name="id_pengeluaran" id="id_pengeluaran' . $row['id_pengeluaran'] . '" class="form-control" readonly>
                     <br>
                     <label >Nopol</label>  
-                    <input type="text" value="' . $row['id_pengeluaran'] . '" name="id_pengeluaran" id="id_pengeluaran' . $row['Nopol'] . '" class="form-control" readonly>
+                    <input type="text" required value="' . $row['Nopol'] . '" name="id_pengeluaran" id="id_pengeluaran' . $row['id_pengeluaran'] . '" class="form-control" readonly>
                     <br>
                     <label>Tanggal Pengeluaran</label>
-                    <input type="date" name="tgl_pengeluaran" id="tgl_pengeluaran' . $row['id_pengeluaran'] . '" value="' . $row['Tgl_Pengeluaran'] . '" class="form-control" />
+                    <input type="date" required name="tgl_pengeluaran" id="tgl_pengeluaran' . $row['id_pengeluaran'] . '" value="' . $row['Tgl_Pengeluaran'] . '" class="form-control" />
                     <br />
                       <label>Nominal</label>
-                      <input type="text" name="nominal" id="nominal' . $row['id_pengeluaran'] . '" value="' . $row['Nominal'] . '" class="form-control" />
+                      <input type="text" required name="nominal" id="nominal' . $row['id_pengeluaran'] . '" value="' . $row['Nominal'] . '" class="form-control" />
                       <br />
                       <label>Keterangan</label>
-                      <input type="text" name="keterangan" id="keterangan' . $row['id_pengeluaran'] . '" value="' . $row['Keterangan'] . '" class="form-control" />
+                      <input type="text" required name="keterangan" id="keterangan' . $row['id_pengeluaran'] . '" value="' . $row['Keterangan'] . '" class="form-control" />
                       <br />
                       <input type="submit" name="update" id="update' . $row['id_pengeluaran'] . '" value="Update" class="btn btn-success" onMouseOver="this.style.backgroundColor=\'#00796b\'" onMouseOut="this.style.backgroundColor=\'#4CAF50\'" />
                     </form>
@@ -458,26 +442,18 @@ require_once('koneksi.php');
           <label>Nopol</label>
           <select name="nopol" id="nopol" class="form-control">
             <?php
-            // Sambungkan ke database Anda
             $koneksi = mysqli_connect("localhost", "root", "", "aswajatrans2");
-
-            // Periksa koneksi
             if (mysqli_connect_errno()) {
               echo "Koneksi ke database gagal: " . mysqli_connect_error();
               exit();
             }
-
-            // Query untuk mengambil data nopol dan merkmobil dari tabel mobil
             $query = "SELECT nopol, merkmobil FROM mobil";
             $result = mysqli_query($koneksi, $query);
 
-            // Loop untuk menambahkan opsi-opsi ke combo box
             while ($row = mysqli_fetch_assoc($result)) {
               echo "<option value='" . $row['nopol'] . "'>" . $row['nopol'] . " - " . $row['merkmobil'] . "</option>";
             }
 
-            // Tutup koneksi ke database
-            mysqli_close($koneksi);
             ?>
           </select>
 
@@ -513,21 +489,14 @@ require_once('koneksi.php');
 function generateID()
 {
   try {
-    // Sambungkan ke database Anda
     $conn = mysqli_connect("localhost", "root", "", "aswajatrans2");
-
-    // Periksa koneksi
     if (mysqli_connect_errno()) {
       echo "Koneksi ke database gagal: " . mysqli_connect_error();
       exit();
     }
-
-    // Query untuk mengambil data pengeluaran dan mengurutkannya berdasarkan id_pengeluaran secara ascending
     $sql = "SELECT * FROM pengeluaran ORDER BY id_pengeluaran ASC";
     $result = mysqli_query($conn, $sql);
-
     $nextNumber = 1;
-
     while ($row = mysqli_fetch_assoc($result)) {
       $NoJual = substr($row['id_pengeluaran'], 3);
       if (!empty($NoJual)) {
@@ -537,9 +506,6 @@ function generateID()
 
     $AN = sprintf("%04d", $nextNumber);
     $newID = "PNG" . $AN;
-
-    // Tutup koneksi ke database
-    mysqli_close($conn);
 
     return $newID;
   } catch (Exception $e) {

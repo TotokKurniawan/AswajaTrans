@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("koneksi.php");
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -206,17 +207,6 @@ session_start();
                   </thead>
                   <tbody>
                     <?php
-                    // Menghubungkan ke database (gantilah dengan informasi koneksi Anda)
-                    $db_host = 'localhost';
-                    $db_user = 'root';
-                    $db_pass = '';
-                    $db_name = 'aswajatrans2';
-
-                    $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-                    if (!$conn) {
-                      die("Koneksi ke database gagal: " . mysqli_connect_error());
-                    }
 
                     // Query SQL untuk mengambil data mobil
                     $sql = "SELECT detail_sewa.*, mobil.MerkMobil from detail_sewa
@@ -231,10 +221,10 @@ session_start();
                         echo "<td>" . $row['Nopol'] . "</td>";
                         echo "<td>" . $row['MerkMobil'] . "</td>";
                         echo "<td>" . $row['Tgl_Kembali'] . "</td>";
-                        echo "<td>" . $row['Lama_Pinjam'] . "</td>";
+                        echo "<td>" . $row['Lama_Pinjam'] . ' hari' . "</td>";
                         echo "<td>" . $row['tanggal_pengembalian'] . "</td>";
-                        echo "<td>" . $row['subtotal'] . "</td>";
-                        echo "<td>" . $row['Denda'] . "</td>";
+                        echo "<td>Rp " . number_format($row['subtotal'], 0, ',', '.') . "</td>";
+                        echo "<td>Rp " . number_format($row['Denda'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['Keterangan'] . "</td>";
                         echo '<td>
                     <center>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("koneksi.php");
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -203,19 +204,6 @@ session_start();
                   </thead>
                   <tbody>
                     <?php
-                    // Menghubungkan ke database (gantilah dengan informasi koneksi Anda)
-                    $db_host = 'localhost';
-                    $db_user = 'root';
-                    $db_pass = '';
-                    $db_name = 'aswajatrans2';
-
-                    $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-                    if (!$conn) {
-                      die("Koneksi ke database gagal: " . mysqli_connect_error());
-                    }
-
-                    // Query SQL untuk mengambil data pelanggan
                     $sql = "SELECT * FROM pelanggan ORDER BY Nama_Pelanggan ASC";
                     $result = mysqli_query($conn, $sql);
 
@@ -245,8 +233,6 @@ session_start();
                       echo "<tr><td colspan='6'>Tidak ada data pelanggan.</td></tr>";
                     }
 
-                    // Tutup koneksi ke database
-                    mysqli_close($conn);
                     ?>
                     <?php
                     // Menampilkan modal edit untuk setiap data pelanggan
@@ -263,19 +249,18 @@ session_start();
               <div class="modal-body">
                 <form action="edit/editpelanggan.php" method="post" id="update' . $row["NIK"] . '" enctype="multipart/form-data">
                   <label >NIK</label>
-                  <input type="text" value="' . $row["NIK"] . '" name="nik" id="nik' . $row["NIK"] . '" class="form-control" readonly>
+                  <input type="text" required value="' . $row["NIK"] . '" name="nik" id="nik' . $row["NIK"] . '" class="form-control" readonly>
                   <br>
                   <label>Nama Pelanggan</label>
-                  <input type="text" name="nama_pelanggan" id="nama_pelanggan' . $row["NIK"] . '" value="' . $row["Nama_Pelanggan"] . '" class="form-control" />
+                  <input type="text" required name="nama_pelanggan" id="nama_pelanggan' . $row["NIK"] . '" value="' . $row["Nama_Pelanggan"] . '" class="form-control" />
                   <br />
                   <label>No. Telepon</label>
-                  <input type="text" name="no_telp" id="no_telp' . $row["NIK"] . '" value="' . $row["No_Telp"] . '" class="form-control" />
+                  <input type="number" required name="no_telp" id="no_telp' . $row["NIK"] . '" value="' . $row["No_Telp"] . '" class="form-control" />
                   <br />
                   <label>Alamat</label>
-                  <input type="text" name="alamat" id="alamat' . $row["NIK"] . '" value="' . $row["Alamat"] . '" class="form-control" />
+                  <input type="text" required name="alamat" id="alamat' . $row["NIK"] . '" value="' . $row["Alamat"] . '" class="form-control" />
                   <br />
-                  <!-- Tambahkan input lainnya sesuai kebutuhan Anda -->
-
+                  
                   <input type="submit" name="update" id="update' . $row["NIK"] . '" value="Update" class="btn btn-success" onMouseOver="this.style.backgroundColor=\'#00796b\'" onMouseOut="this.style.backgroundColor=\'#4CAF50\'" />
                 </form>
               </div>
@@ -455,16 +440,16 @@ session_start();
         <form action="insert/insertpelanggan.php" method="post" id="insert_form" enctype='multipart/form-data'>
 
           <label>NIK</label>
-          <input type="text" name="nik" id="nik" class="form-control" />
+          <input type="text" required name="nik" id="nik" class="form-control" />
           <br />
           <label>Nama Pelanggan</label>
-          <input type="text" name="namapelanggan" id="namapelanggan" class="form-control" />
+          <input type="text" required name="namapelanggan" id="namapelanggan" class="form-control" />
           <br />
           <label>No Telpon</label>
-          <input type="no" name="notelpon" id="notelpon" class="form-control">
+          <input type="number" required name="notelpon" id="notelpon" class="form-control">
           <br />
           <label>Alamat</label>
-          <input type="text" name="alamat" id="alamat" class="form-control" />
+          <input type="text" required name="alamat" id="alamat" class="form-control" />
           <br />
           <input type="submit" name="insert" id="insert" value="Simpan" class="btn btn-success" onMouseOver="this.style.backgroundColor='#00796b'" onMouseOut="this.style.backgroundColor='#4CAF50'" />
         </form>

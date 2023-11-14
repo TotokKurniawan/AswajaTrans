@@ -268,10 +268,10 @@
                                   <center><?php echo $data['Tgl_Kembali'] ?></center>
                                 </td>
                                 <td>
-                                  <center><?php echo $data['bayar'] ?></center>
+                                  <center>Rp <?php echo number_format($data['bayar'], 0, ',', '.'); ?></center>
                                 </td>
                                 <td>
-                                  <center><?php echo $data['Total_Harga'] ?></center>
+                                  <center>Rp <?php echo number_format($data['Total_Harga'], 0, ',', '.'); ?></center>
                                 </td>
                                 <td>
                                   <center><a href="cetak/cetaklaporan.php?id_Sewa=<?php echo $data['id_Sewa']; ?>" title="Edit Data ini" class="btn btn-info btn-sm"><i class="fa fa-print "></i> Print</a></center>
@@ -282,6 +282,7 @@
                             }
                             ?>
                           </tbody>
+
                         </table>
                       </div>
                 <?php
