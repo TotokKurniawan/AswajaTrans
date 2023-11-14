@@ -7,12 +7,14 @@ if (isset($_POST['update'])) {
     $fullname = $_POST['name'];
     $username = $_POST['usera'];
     $password = $_POST['pass'];
+    $hint = $_POST['hint'];
+    $jawaban = $_POST['jawab'];
 
     // Hash kata sandi sebelum menyimpannya
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Perbarui data pengguna dalam database (nama, username, dan kata sandi yang dihash)
-    $query = "UPDATE user SET Nama='$fullname', Username='$username', Password='$hashedPassword' WHERE id='$id'";
+    $query = "UPDATE user SET Nama='$fullname', Username='$username', Password='$hashedPassword' ,Hint ='$hint', JawabanHint = '$jawaban' WHERE id='$id'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

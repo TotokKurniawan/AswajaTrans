@@ -274,7 +274,6 @@ mysqli_close($conn);
                                 <h4 class="modal-title">Edit Data Admin</h4>
                             </div>
                             <div class="modal-body">
-                                <!-- Your form for editing user data goes here -->
                                 <form action="edit/edituser.php" method="post" id="edit_form" enctype='multipart/form-data'>
                                     <input type="text" name="id" value="<?php echo $userData['id']; ?>" hidden />
                                     <br />
@@ -283,6 +282,19 @@ mysqli_close($conn);
                                     <br />
                                     <label>Username</label>
                                     <input type="text" name="usera" value="<?php echo $userData['Username']; ?>" class="form-control" />
+                                    <br />
+                                    <label>Hint</label>
+                                    <select class="form-control" name="hint">
+                                        <option value="">Choose One Hint</option>
+                                        <option value="Siapa Nama Ayahmu ??">Siapa Nama Ayahmu ?? </option>
+                                        <option value="Siapa Nama Ibumu ??">Siapa Nama Ibumu ??</option>
+                                        <option value="Apa Warna Kesukaanmu ??">Apa Warna Kesukaanmu ??</option>
+                                        <option value="Apa Makanan Kesukaanmu ??">Apa Makanan Kesukaanmu ??</option>
+                                        <!-- Tambahkan pilihan lainnya sesuai kebutuhan Anda -->
+                                    </select>
+                                    <br />
+                                    <label>Jawaban Hint</label>
+                                    <input type="text" name="jawab" value="<?php echo $userData['JawabanHint']; ?>" class="form-control" />
                                     <br />
                                     <label>Password</label>
                                     <input type="password" name="pass" placeholder="*********" class="form-control" />
