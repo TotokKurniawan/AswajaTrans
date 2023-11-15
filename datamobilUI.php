@@ -264,9 +264,12 @@ require_once("koneksi.php") ?>
                                 <br />
                                 <label>Type Mobil</label>
                                 <input type="text" required name="type" id="type' . $row["Nopol"] . '" value="' . $row["TypeMobil"] . '" class="form-control" />
-                                <br />
+                                <br />  
                                 <label>Harga</label>
-                                <input type="number" required name="harga" id="harga' . $row["Nopol"] . '" value="' . $row["harga"] . '" class="form-control" />
+                                <div class="input-group">
+                                <span class="input-group-addon">Rp</span>
+                                <input type="text" required name="harga" id="harga" class="form-control" />
+                                </div>
                                 <br />
                                 <label>Status</label>
                                 <select class="form-control" name="st" id="st' . $row["Nopol"] . '">
@@ -459,10 +462,13 @@ require_once("koneksi.php") ?>
           <input type="text" required name="type" id="type" class="form-control">
           <br />
           <label>Harga</label>
-          <input type="number" required name="harga" id="harga" class="form-control" />
+          <div class="input-group">
+            <span class="input-group-addon">Rp</span>
+            <input type="text" required name="harga" id="harga" class="form-control" />
+          </div>
           <br />
           <label>Status</label>
-          <div class="form-holder">
+          <div class=" form-holder">
             <span class="lnr lnr-question-circle"></span>
             <select class="form-control" name="St">
               <option value="Mobil Belum Disewa">Mobil Belum Disewa </option>

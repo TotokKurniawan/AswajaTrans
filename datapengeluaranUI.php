@@ -251,7 +251,11 @@ require_once('koneksi.php');
                     <input type="date" required name="tgl_pengeluaran" id="tgl_pengeluaran' . $row['id_pengeluaran'] . '" value="' . $row['Tgl_Pengeluaran'] . '" class="form-control" />
                     <br />
                       <label>Nominal</label>
-                      <input type="text" required name="nominal" id="nominal' . $row['id_pengeluaran'] . '" value="' . $row['Nominal'] . '" class="form-control" />
+                      <div class="input-group">
+                                <span class="input-group-addon">Rp</span>
+                                <input type="text" required name="nominal" id="nominal' . $row['id_pengeluaran'] . '" value="' . $row['Nominal'] . '" class="form-control" />
+                                </div>
+                                
                       <br />
                       <label>Keterangan</label>
                       <input type="text" required name="keterangan" id="keterangan' . $row['id_pengeluaran'] . '" value="' . $row['Keterangan'] . '" class="form-control" />
@@ -465,7 +469,11 @@ require_once('koneksi.php');
           <br />
 
           <label>Nominal</label>
-          <input type="text" name="nom" id="nom" class="form-control" />
+          <div class="input-group">
+            <span class="input-group-addon">Rp</span>
+            <input type="text" name="nom" id="nom" class="form-control" />
+          </div>
+
           <br />
 
           <label>Keterangan</label>

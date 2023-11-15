@@ -279,7 +279,12 @@ require_once("koneksi.php")   ?>
                 <div class="stat-content">
                   <div class="text-left dib">
                     <?php
-                    $sql = "SELECT COUNT(id_Sewa) AS total_sewa FROM sewa ";
+                    $sql = "SELECT 
+                    COUNT(id_Sewa) AS total_sewa
+                  FROM 
+                    sewa
+                  WHERE 
+                    MONTH(tgl_sewa) = MONTH(CURRENT_DATE); ";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {
@@ -353,20 +358,20 @@ require_once("koneksi.php")   ?>
           </div>
         </div>
       </div>
-    </div>
 
 
 
 
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-inner bg-white">
-        <div class="row">
-          <div class="col-sm-6 ">Copyright &copy; 2023 TEAM 1 MIF D</div>
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="footer-inner bg-white">
+          <div class="row">
+            <div class="col-sm-6 ">Copyright &copy; 2023 TEAM 1 MIF D</div>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

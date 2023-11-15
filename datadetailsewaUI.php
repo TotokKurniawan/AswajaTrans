@@ -358,7 +358,10 @@ if ($result) {
                         <input type="date" name="tglpengembalian" id="tglpengembalian' . $row["id_Sewa"] . '" value="' . $row["tanggal_pengembalian"] . '" class="form-control" />
                         <br />
                         <label>Denda</label>
-                        <input type="text" name="denda" id="denda' . $row["id_Sewa"] . '" value="' . $row["Denda"] . '" class="form-control" />
+                        <div class="input-group">
+                                <span class="input-group-addon">Rp</span>
+                                <input type="text" name="denda" id="denda' . $row["id_Sewa"] . '" value="' . $row["Denda"] . '" class="form-control" />
+                        </div>
                         <br />
                         <label>Keterangan</label>
                         <input type="text" name="keterangan" id="keterangan' . $row["id_Sewa"] . '" value="' . $row["Keterangan"] . '" class="form-control" />

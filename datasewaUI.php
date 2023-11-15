@@ -278,13 +278,25 @@ require_once("koneksi.php");
                                                   <input type="text" value="' . $row["id_Sewa"] . '" name="id" id="id' . $row["id_Sewa"] . '" class="form-control" readonly>
                                                   <br>
                                                   <label>Total Harga</label>
-                                                  <input type="number" required name="total" id="total' . $row["id_Sewa"] . '" value="' . $row["Total_Harga"] . '" class="form-control" readonly />
+                                                  <div class="input-group">
+                                <span class="input-group-addon">Rp</span>
+                                <input type="number" required name="total" id="total' . $row["id_Sewa"] . '" value="' . $row["Total_Harga"] . '" class="form-control" readonly />
+                                </div>
+                                
                                                   <br />
                                                   <label>Bayar</label>
-                                                  <input type="number" required name="bayar" id="bayar' . $row["id_Sewa"] . '" value="' . $row["bayar"] . '" class="form-control" />
+                                                  <div class="input-group">
+                                <span class="input-group-addon">Rp</span>
+                                <input type="number" required name="bayar" id="bayar' . $row["id_Sewa"] . '" value="' . $row["bayar"] . '" class="form-control" />
+                                </div>
+                                
                                                   <br />
                                                   <label>Sisa Bayar</label>
-                                                  <input type="number" required name="sisa" id="sisa' . $row["id_Sewa"] . '" value="' . $row["Sisa yang harus dibayar"] . '" class="form-control" />
+                                                  <div class="input-group">
+                                <span class="input-group-addon">Rp</span>
+                                <input type="number" required name="sisa" id="sisa' . $row["id_Sewa"] . '" value="' . $row["Sisa yang harus dibayar"] . '" class="form-control" />
+                                </div>
+                                
                                                   <br />
                                                   <label>Status Bayar</label>
                                                   <select class="form-control" name="stbyr" id="stbyr' . $row["id_Sewa"] . '">

@@ -266,7 +266,7 @@ mysqli_close($conn);
                   <div class="form-group">
                     <label class=" form-control-label">Bayar DP Mobil</label>
                     <div class="input-group">
-                      <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+                      <span class="input-group-addon">Rp</span>
                       <input class="form-control" required id="bayar" oninput="validateInput(this)">
                       <input type="hidden" class="form-control" name="bayar" id="bayar1">
                     </div>
@@ -362,11 +362,11 @@ mysqli_close($conn);
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class=" form-control-label">Lama Pinjam</label>
+                    <label class="form-control-label">Lama Pinjam</label>
                     <div class="input-group">
                       <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                       <input class="form-control" required name="lamapinjam" id="lamapinjam">
-
+                      <div class="input-group-addon">hari</div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -386,10 +386,12 @@ mysqli_close($conn);
                   <div class="form-group">
                     <label class=" form-control-label">Sisa Bayar</label>
                     <div class="input-group">
-                      <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                      <span class="input-group-addon">Rp</span>
                       <input class="form-control" required id="sisa" readonly>
                       <input type="hidden" class="form-control" name="sisa" id="sisa1" readonly>
                     </div>
+
+
                   </div>
                   <input type="submit" name="insert" id="insert" value="Simpan Detail" class="btn btn-success" onMouseOver="this.style.backgroundColor=' #00796b'" onMouseOut="this.style.backgroundColor='#4CAF50'" onclick="" />
                 </div>
