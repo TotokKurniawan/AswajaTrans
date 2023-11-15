@@ -206,7 +206,7 @@ require_once("koneksi.php")   ?>
                   <div class="text-left dib">
                     <?php
                     // Query SQL untuk mengambil data pemasukan
-                    $sql = "SELECT SUM(bayar) AS total_pemasukan FROM sewa";
+                    $sql = "SELECT SUM(bayar) AS total_pemasukan FROM sewa where YEAR(Tgl_sewa) = YEAR(CURRENT_DATE);";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {
@@ -244,7 +244,7 @@ require_once("koneksi.php")   ?>
                 </div>
                 <div class="stat-content">
                   <?php
-                  $sql = "SELECT SUM(Nominal) AS total_pengeluaran FROM pengeluaran";
+                  $sql = "SELECT SUM(Nominal) AS total_pengeluaran FROM pengeluaran WHERE YEAR(Tgl_Pengeluaran) = YEAR(CURRENT_DATE);";
                   $result = mysqli_query($conn, $sql);
 
                   $total_pengeluaran_formatted = "Rp 0";
@@ -279,7 +279,7 @@ require_once("koneksi.php")   ?>
                 <div class="stat-content">
                   <div class="text-left dib">
                     <?php
-                    $sql = "SELECT COUNT(id_Sewa) AS total_sewa FROM sewa";
+                    $sql = "SELECT COUNT(id_Sewa) AS total_sewa FROM sewa ";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {

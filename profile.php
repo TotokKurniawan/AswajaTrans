@@ -324,7 +324,7 @@ if ($result) {
                     <input type="text" name="jawab" value="<?php echo $userData['JawabanHint']; ?>" class="form-control" />
                     <br />
                     <label>Password</label>
-                    <input type="password" name="pass" placeholder="*********" class="form-control" />
+                    <input type="password" name="pass" required placeholder="*********" class="form-control" />
                     <br />
                     <label for="foto">Foto Profil</label><br>
                     <input type="file" name="foto" id="foto"><br />

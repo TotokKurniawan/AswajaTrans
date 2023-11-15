@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Cetak Laporan</title>
+
+  <link rel="apple-touch-icon" href="../assets/img/istockphoto-669053856-170667a.jpg" />
+  <link rel="shortcut icon" href="../assets/img/istockphoto-669053856-170667a.jpg" />
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -42,6 +45,7 @@
 
       <!-- Table row -->
       <div class="row">
+        <h1 class="text-center">Laporan Harian</h1>
         <div class="col-xs-12 table-responsive table-bordered">
           <?php
           include '../koneksi.php';
@@ -59,6 +63,7 @@
             exit; // Keluar dari script
           }
           ?>
+
           <table class="table table-striped table-responsive" border="1">
             <thead>
               <tr class="warning">
@@ -112,8 +117,9 @@
       <!-- /.row -->
 
     </section>
+  </div>
 
-    <!-- ./wrapper -->
+  <!-- ./wrapper -->
 </body>
 
 </html>

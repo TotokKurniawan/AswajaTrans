@@ -11,10 +11,8 @@ if (isset($_POST['update'])) {
     $jawaban = $_POST['jawab'];
     $foto = $_FILES['foto'];
 
-    // Hash kata sandi sebelum menyimpannya
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Handle file upload
     $fotoFileName = '';
 
     if ($foto['size'] > 0) {
@@ -29,7 +27,6 @@ if (isset($_POST['update'])) {
         }
     }
 
-    // Perbarui data pengguna dalam database (termasuk foto jika diunggah)
     $query = "UPDATE user SET Nama='$fullname', Username='$username', Password='$hashedPassword', Hint='$hint', JawabanHint='$jawaban', Foto='$fotoFileName' WHERE id='$id'";
     $result = mysqli_query($conn, $query);
 
