@@ -180,12 +180,15 @@ require_once("koneksi.php")   ?>
             <div class="user-area dropdown float-right">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php
-                $query = "SELECT Foto FROM User WHERE Username = '" . $_SESSION['username'] . "'";
+                $query = "SELECT Foto, Nama FROM User WHERE Username = '" . $_SESSION['username'] . "'";
                 $result = mysqli_query($conn, $query);
 
                 if ($result) {
                   $row = mysqli_fetch_assoc($result);
                   $urlFoto = $row['Foto'];
+                  $namaUser = $row['Nama'];
+
+                  echo '<span class="mr-2" style="text-transform: uppercase; font-weight: bold;">' . $namaUser . '</span>'; // Display user's name in uppercase and bold
 
                   if (!is_null($urlFoto)) {
                     $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
@@ -196,15 +199,17 @@ require_once("koneksi.php")   ?>
                 } else {
                   echo 'Error dalam menjalankan query: ' . mysqli_error($conn);
                 }
-
                 ?>
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="profile.php"><i class="fa fa- user"></i>My Profile</a>
-                <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
+                <a class="dropdown-item" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
+                <a class="dropdown-item" href="login.php"><i class="fa fa-power-off"></i> Logout</a>
               </div>
             </div>
+
+
+
           </div>
         </div>
     </header>
@@ -244,7 +249,7 @@ require_once("koneksi.php")   ?>
                     <div class="stat-text">
                       <span class="pendapatan"><?php echo $total_pemasukan_formatted; ?></span>
                     </div>
-                    <div class="stat-heading">Pendapatan</div>
+                    <div class="stat-heading">Pendapatan Tahun Ini </div>
                   </div>
                 </div>
 
@@ -279,7 +284,7 @@ require_once("koneksi.php")   ?>
                     <div class="stat-text">
                       <span class="pengeluaran"><?php echo $total_pengeluaran_formatted; ?></span>
                     </div>
-                    <div class="stat-heading">Pengeluaran</div>
+                    <div class="stat-heading">Pengeluaran Tahun Ini</div>
                   </div>
                 </div>
               </div>
@@ -316,7 +321,7 @@ require_once("koneksi.php")   ?>
                     <div class="stat-text">
                       <span class="count"><?php echo $total_sewa; ?></span>
                     </div>
-                    <div class="stat-heading">Total Sewa</div>
+                    <div class="stat-heading">Total Sewa Bulan Ini </div>
 
                   </div>
                 </div>
