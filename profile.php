@@ -1,22 +1,16 @@
 <?php
 session_start();
 require_once("koneksi.php");
-
-// Use a prepared statement to prevent SQL injection
 $sql = "SELECT * FROM user WHERE Username = ?";
 $stmt = mysqli_prepare($conn, $sql);
 
-// Bind the parameter
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']); // Assuming 'Username' is a string, change the "s" if it's an integer
 
-// Execute the statement
 mysqli_stmt_execute($stmt);
 
-// Get the result
 $result = mysqli_stmt_get_result($stmt);
 
 if ($result) {
-    // Fetch the data
     $userData = mysqli_fetch_assoc($result);
 } else {
     die("Error: " . $sql . "<br>" . mysqli_error($conn));
@@ -160,8 +154,27 @@ if ($result) {
 
                         <div class="user-area dropdown float-right">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="user-avatar rounded-circle" src="assets/images/admin.jpg" alt="User Avatar" />
+                                <?php
+                                $query = "SELECT Foto FROM User WHERE Username = '" . $_SESSION['username'] . "'";
+                                $result = mysqli_query($conn, $query);
+
+                                if ($result) {
+                                    $row = mysqli_fetch_assoc($result);
+                                    $urlFoto = $row['Foto'];
+
+                                    if (!is_null($urlFoto)) {
+                                        $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
+                                        echo '<img alt="User Avatar" src="' . $urlFoto . '" class="user-avatar rounded-circle img-thumbnail img-fluid">';
+                                    } else {
+                                        echo '<img alt="User Avatar" src="assets/images/polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid">';
+                                    }
+                                } else {
+                                    echo 'Error dalam menjalankan query: ' . mysqli_error($conn);
+                                }
+
+                                ?>
                             </a>
+
 
                             <div class="user-menu dropdown-menu">
                                 <a class="nav-link" href="profile.php"><i class="fa fa- user"></i>My Profile</a>
@@ -186,9 +199,31 @@ if ($result) {
                                 <div class="col-sm-3 text-center">
                                     <div class="row">
                                         <div class="col-12">
-                                            <img alt="" src="https://sim-online.polije.ac.id/assets/img/LOGO-POLITEKNIK-NEGERI -JEMBER-200x200.png" class="img-thumbnail img-fluid">
+                                            <?php
+                                            $query = "SELECT Foto FROM User WHERE Username = '" . $_SESSION['username'] . "'";
+                                            $result = mysqli_query($conn, $query);
+
+                                            if ($result) {
+                                                $row = mysqli_fetch_assoc($result);
+                                                $urlFoto = $row['Foto'];
+
+                                                if (!is_null($urlFoto)) {
+                                                    $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
+                                                    echo '<img alt="" src="' . $urlFoto . '" class="img-thumbnail img-fluid" ">';
+                                                } else {
+                                                    echo '<img alt="" src="assets/images/polije.png" class="img-thumbnail img-fluid" >';
+                                                }
+                                            } else {
+                                                echo 'Error dalam menjalankan query: ' . mysqli_error($conn);
+                                            }
+
+                                            ?>
+
                                         </div>
+
+
                                     </div>
+
                                 </div>
                                 <div class="col-sm-9 mt-2 text-center"> <!-- Use text-center class for centering content -->
                                     <table class="table table-striped">

@@ -27,7 +27,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 $_SESSION['harga_data'] = $dataHarga; // Menyimpan data harga dalam variabel sesi
 $_SESSION['merk_data'] = $dataMerk;   // Menyimpan data merk mobil dalam variabel sesi
 
-mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -169,7 +168,25 @@ mysqli_close($conn);
 
             <div class="user-area dropdown float-right">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="user-avatar rounded-circle" src="assets/images/admin.jpg" alt="User Avatar" />
+                <?php
+                $query = "SELECT Foto FROM User WHERE Username = '" . $_SESSION['username'] . "'";
+                $result = mysqli_query($conn, $query);
+
+                if ($result) {
+                  $row = mysqli_fetch_assoc($result);
+                  $urlFoto = $row['Foto'];
+
+                  if (!is_null($urlFoto)) {
+                    $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
+                    echo '<img alt="User Avatar" src="' . $urlFoto . '" class="user-avatar rounded-circle img-thumbnail img-fluid">';
+                  } else {
+                    echo '<img alt="User Avatar" src="assets/images/polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid">';
+                  }
+                } else {
+                  echo 'Error dalam menjalankan query: ' . mysqli_error($conn);
+                }
+
+                ?>
               </a>
 
               <div class="user-menu dropdown-menu">
