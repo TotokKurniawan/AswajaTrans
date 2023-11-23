@@ -45,6 +45,8 @@ if ($result) {
     <link rel="stylesheet" href="assets/css/cs-skin-elastic.css" />
     <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="sweetallert/sweetalert2.min.css">
+
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css" />
 
@@ -100,10 +102,6 @@ if ($result) {
                         </a>
                     </li>
 
-                    <li class="menu-item-">
-                        <a href="maps.php" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-map"></i>Maps</a>
-                    </li>
                     <li class="menu-title">Log Out</li>
                     <!-- /.menu-title -->
 
@@ -297,8 +295,7 @@ if ($result) {
                 <script src="assets/js/lib/data-table/buttons.print.min.js"></script>
                 <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
                 <script src="assets/js/init/datatables-init.js"></script>
-
-
+                <script src="sweetallert/sweetalert2.min.js"></script>
 </body>
 <?php if (@$_SESSION['myprofile']) { ?>
     <script>
@@ -341,10 +338,10 @@ if ($result) {
                 <form action="edit/edituser.php" method="post" enctype="multipart/form-data">
                     <input type="text" name="id" value="<?php echo $userData['id']; ?>" hidden />
                     <label>Full Name</label>
-                    <input type="text" name="name" value="<?php echo $userData['Nama']; ?>" class="form-control" />
+                    <input type="text" required name="name" value="<?php echo $userData['Nama']; ?>" class="form-control" />
                     <br />
                     <label>Username</label>
-                    <input type="text" name="usera" value="<?php echo $userData['Username']; ?>" class="form-control" />
+                    <input type="text" required name="usera" value="<?php echo $userData['Username']; ?>" class="form-control" />
                     <br />
                     <label>Hint</label>
                     <select class="form-control" name="hint">

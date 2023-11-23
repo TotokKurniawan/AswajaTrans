@@ -83,10 +83,6 @@ require_once("koneksi.php") ?>
             </a>
           </li>
 
-          <li class="menu-item-">
-            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-map"></i>Maps</a>
-          </li>
           <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
 
@@ -278,7 +274,7 @@ require_once("koneksi.php") ?>
                             <div class="modal-body">
                               <form action="edit/editmobil.php" method="post" id="update' . $row["Nopol"] . '" enctype="multipart/form-data">
                                 <label >Nopol</label>
-                                <input required type="text" value="' . $row["Nopol"] . '" name="nopol" id="nopol' . $row["Nopol"] . '" class="form-control" readonly>
+                                <input required type="text" required value="' . $row["Nopol"] . '" name="nopol" id="nopol' . $row["Nopol"] . '" class="form-control" readonly>
                                 <br>
                                 <label>Merk Mobil</label>
                                 <input type="text" required name="merk" id="merk' . $row["Nopol"] . '" value="' . $row["MerkMobil"] . '" class="form-control" />
@@ -289,7 +285,7 @@ require_once("koneksi.php") ?>
                                 <label>Harga</label>
                                 <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" required name="harga" id="harga" class="form-control" />
+                                <input type="number" required name="harga" id="harga' . $row["Nopol"] . '" value="' . $row["harga"] . '" class="form-control" />
                                 </div>
                                 <br />
                                 <label>Status</label>
@@ -480,12 +476,19 @@ require_once("koneksi.php") ?>
           <input type="text" required name="merk" id="merk" class="form-control" />
           <br />
           <label>Type Mobil</label>
-          <input type="text" required name="type" id="type" class="form-control">
-          <br />
+          <div class=" form-holder">
+            <span class="lnr lnr-question-circle"></span>
+            <select class="form-control" name="type">
+              <option value="Minibus">Minibus </option>
+              <option value="Pick Up">Pick Up </option>
+              <option value="Bus">Bus</option>
+              <!-- Tambahkan pilihan lainnya sesuai kebutuhan Anda -->
+            </select>
+          </div><br />
           <label>Harga</label>
           <div class="input-group">
             <span class="input-group-addon">Rp</span>
-            <input type="text" required name="harga" id="harga" class="form-control" />
+            <input type="number" required name="harga" id="harga" class="form-control" />
           </div>
           <br />
           <label>Status</label>

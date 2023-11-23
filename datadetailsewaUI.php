@@ -84,10 +84,6 @@ require_once("koneksi.php");
             </a>
           </li>
 
-          <li class="menu-item-">
-            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-map"></i>Maps</a>
-          </li>
           <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
 
@@ -367,21 +363,21 @@ if ($result) {
                     <div class="modal-body">
                       <form action="edit/editdetailsewa.php" method="post" id="update' . $row["id_Sewa"] . '" enctype="multipart/form-data">
                         <label >Id Sewa</label>
-                        <input type="text" value="' . $row["id_Sewa"] . '" name="id" id="id' . $row["id_Sewa"] . '" class="form-control" readonly>
+                        <input type="text" required value="' . $row["id_Sewa"] . '" name="id" id="id' . $row["id_Sewa"] . '" class="form-control" readonly>
                         <br>
                         <label> Nopol</label>
-                        <input type="text" value="' . $row["id_Sewa"] . '" name="nopol" id="nopol' . $row["Nopol"] . '" class="form-control" readonly>
+                        <input type="text" required value="' . $row["id_Sewa"] . '" name="nopol" id="nopol' . $row["Nopol"] . '" class="form-control" readonly>
                         <br>
                         <label>Tanggal Kembali</label>
-                        <input type="date" name="tglkembali" id="tglkembali' . $row["id_Sewa"] . '" value="' . $row["Tgl_Kembali"] . '" class="form-control" readonly />
+                        <input type="date" required name="tglkembali" id="tglkembali' . $row["id_Sewa"] . '" value="' . $row["Tgl_Kembali"] . '" class="form-control" readonly />
                         <br />
                         <label>Tanggal Pengembalian</label>
-                        <input type="date" name="tglpengembalian" id="tglpengembalian' . $row["id_Sewa"] . '" value="' . $row["tanggal_pengembalian"] . '" class="form-control" />
+                        <input type="date" required name="tglpengembalian" id="tglpengembalian' . $row["id_Sewa"] . '" value="' . $row["tanggal_pengembalian"] . '" class="form-control" />
                         <br />
                         <label>Denda</label>
                         <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="denda" id="denda' . $row["id_Sewa"] . '" value="' . $row["Denda"] . '" class="form-control" />
+                                <input type="number"  name="denda" id="denda' . $row["id_Sewa"] . '" value="' . $row["Denda"] . '" class="form-control" />
                         </div>
                         <br />
                         <label>Keterangan</label>

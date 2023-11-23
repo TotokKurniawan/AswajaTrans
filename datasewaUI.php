@@ -84,10 +84,6 @@ require_once("koneksi.php");
             </a>
           </li>
 
-          <li class="menu-item-">
-            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-map"></i>Maps</a>
-          </li>
           <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
 
@@ -220,12 +216,10 @@ require_once("koneksi.php");
                         <th>Merk Mobil</th>
                         <th>Tgl Sewa</th>
                         <th>Tgl Kembali</th>
-                        <th>Tgl Pengembalian</th>
                         <th>Total Harga</th>
                         <th>Bayar</th>
                         <th>Sisa Bayar</th>
                         <th>Status Bayar</th>
-                        <th>Denda</th>
                         <th>Status Mobil</th>
                         <th>
                           Action
@@ -253,12 +247,10 @@ require_once("koneksi.php");
                         echo "<td>" . $row['MerkMobil'] . "</td>";
                         echo "<td>" . $row['Tgl_sewa'] . "</td>";
                         echo "<td>" . $row['Tgl_Kembali'] . "</td>";
-                        echo "<td>" . $row['tanggal_pengembalian'] . "</td>";
                         echo "<td>" . $row['Total_Harga'] . "</td>";
                         echo "<td>Rp " . number_format($row['bayar'], 0, ',', '.') . "</td>";
                         echo "<td>Rp " . number_format($row['Sisa yang harus dibayar'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['StatusBayar'] . "</td>";
-                        echo "<td>Rp " . number_format($row['Denda'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['Status'] . "</td>";
                         echo '<td>
                     <center>

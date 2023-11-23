@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Transaksi Sewa</title>
+    <title>Transaksi Sewa 2</title>
     <meta name="description" content="Aswaja Trans" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -112,12 +112,12 @@ session_start();
         </nav>
     </aside> <!-- /#left-panel -->
 
-
     <!-- Left Panel -->
 
     <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
+
         <!-- Header-->
         <header id="header" class="header">
             <div class="top-left">
@@ -142,6 +142,9 @@ session_start();
                                 if ($result) {
                                     $row = mysqli_fetch_assoc($result);
                                     $urlFoto = $row['Foto'];
+                                    $namaUser = $row['Nama'];
+
+                                    echo '<span class="mr-2" style="text-transform: uppercase; font-weight: bold;">' . $namaUser . '</span>'; // Display user's name in uppercase and bold
 
                                     if (!is_null($urlFoto)) {
                                         $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
@@ -156,16 +159,14 @@ session_start();
                             </a>
 
                             <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="profile.php"><i class="fa fa- user"></i>My Profile</a>
-                                <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
+                                <a class="dropdown-item" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
+                                <a class="dropdown-item" href="login.php"><i class="fa fa-power-off"></i> Logout</a>
                             </div>
                         </div>
 
                     </div>
                 </div>
-        </header>
-        <!-- /#header -->
-        <!-- Header-->
+        </header> <!-- Header-->
 
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
@@ -199,50 +200,103 @@ session_start();
 
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header"><strong>Form Transaksi</strong></div>
+                            <div class="card-header"><strong>Form Pilih Mobil</strong></div>
                             <div class="card-body card-block">
-                                <form id="myForm" action="insert/insertsewa2.php" method="post">
-                                    <div class="form-group">
-                                        <label for="company" class="form-control-label">Kode Transaksi</label>
-                                        <input type="text" id="kode" name="kode" readonly value="<?php echo generateID2(); ?>" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="vat" class="form-control-label">NIK - Nama Pelanggan</label>
-                                        <select name="nik" id="nik" class="form-control">
-                                            <?php
-                                            $sql = "SELECT NIK, Nama_Pelanggan FROM pelanggan";
-                                            $result = $conn->query($sql);
+                                <form action="insert/insertsewa3.php" method="post">
+                                    <label class="form-control-label">Kode Transaksi</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-shopping-cart"></i></div>
+                                        <?php
 
-                                            if ($result->num_rows > 0) {
-                                                echo '<option value="" disabled selected>Pilih Pelanggan</option>';
+                                        $query = "SELECT id_Sewa FROM sewa ORDER BY id_Sewa DESC LIMIT 1";
+                                        $result = mysqli_query($conn, $query);
 
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo "<option value='" . $row["NIK"] . "'>" . $row["NIK"] . " - " . $row["Nama_Pelanggan"] . "</option>";
-                                                }
-                                            } else {
-                                                echo "Tidak ada data pelanggan";
+                                        if ($result) {
+                                            $row = mysqli_fetch_assoc($result);
+                                            $lastIdSewa = $row['id_Sewa'];
+                                            echo '<input class="form-control" name="id" id="kodeStruk" value="' . $lastIdSewa . '" readonly>';
+                                        } else {
+                                            echo '<input class="form-control" name="id" id="kodeStruk" value="' . generateID2() . '" readonly>';
+                                        }
+                                        ?>
+                                    </div><br>
+
+                                    <div class="form-group">
+                                        <label for="vat" class="form-control-label">Nopol - Merk Mobil</label>
+                                        <?php
+                                        $query = "SELECT nopol, MerkMobil, Harga FROM mobil WHERE Status = 'Mobil Belum Disewa'";
+                                        $result = mysqli_query($conn, $query);
+
+                                        if ($result) {
+                                            echo '<select id="nopol" name="nopol" class="form-control" onchange="updateSubtotal()">';
+
+                                            echo '<option value="" disabled selected>Pilih Mobil</option>';
+
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $selected = ($row['nopol'] == $defaultNopol) ? 'selected' : '';
+                                                echo '<option value="' . $row['nopol'] . '" ' . $selected . ' data-harga="' . $row['Harga'] . '">' . $row['nopol'] . " - " . $row['MerkMobil'] . '  </option>';
                                             }
+                                            echo '</select>';
 
-                                            ?>
-                                        </select>
+                                            // Bebaskan hasil query
+                                            mysqli_free_result($result);
+                                        } else {
+                                            echo "Error in the query: " . mysqli_error($koneksi);
+                                        }
+                                        ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="street" class="form-control-label">Tanggal Sewa</label>
-                                        <input type="text" id="tanggal-sewa" name="tanggal-sewa" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                        <label class="form-control-label">Subtotal</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">Rp.</div>
+                                            <input class="form-control" required name="subtotal" id="subtotal" readonly>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="street" class="form-control-label">Tanggal Kembali</label>
-                                        <input type="date" id="tanggal-kembali" name="tanggal-kembali" class="form-control">
+                                        <label class="form-control-label">Lama Pinjam</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                            <input class="form-control" required name="lamapinjam" id="lamapinjam" onchange="updateTotalHarga()">
+                                            <div class="input-group-addon">hari</div>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label class="form-control-label">Total Sewa Mobil</label>
+                                        <label class="form-control-label">Bayar DP Mobil</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rp</span>
+                                            <input class="form-control" required id="bayar" name="bayar" onchange="updateSisaBayar()">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label">Status Bayar</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                            <select class="form-control" name="stbyar" id="stbyar">
+                                                <option value="Kurang">Kurang</option>
+                                                <option value="Lunas">Lunas</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label">Total Harga</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
-                                            <input class="form-control" required name="total-sewa" id="total-sewa">
+                                            <input class="form-control" required name="tothar" id="tothar" readonly>
                                         </div>
-                                    </div><br>
-                                    <div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label">Sisa Bayar</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rp</span>
+                                            <input class="form-control" required id="sisa" readonly>
+                                            <input type="hidden" class="form-control" name="sisa" id="sisa1" readonly>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-lg btn-info btn-block">
                                         LANJUT PILIH MOBIL
@@ -271,7 +325,6 @@ session_start();
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
@@ -292,7 +345,6 @@ session_start();
     <script src="sweetallert/sweetalert2.min.js"></script>
 
 </body>
-
 
 </html>
 <?php if (@$_SESSION['insertsewa']) { ?>

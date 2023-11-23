@@ -33,6 +33,14 @@ require_once("koneksi.php");
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css" />
 
   <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+  <style>
+    .center {
+      text-align: center;
+      margin-top: 20px;
+      text-transform: uppercase;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -84,10 +92,6 @@ require_once("koneksi.php");
             </a>
           </li>
 
-          <li class="menu-item-">
-            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-map"></i>Maps</a>
-          </li>
           <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
 
@@ -206,6 +210,7 @@ require_once("koneksi.php");
                 <strong class="card-title">Laporan</strong>
               </div>
               <div class="card-body">
+
                 <form role="form" action="" method="GET">
                   <div class="input-group">
                     <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="false" name="bln" id="id_pinjaman">
@@ -229,6 +234,34 @@ require_once("koneksi.php");
                     </span>
                   </div>
                 </form>
+
+                <?php
+                // Check if the form is submitted
+                if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                  // Check if the 'bln' parameter is set in the URL
+                  if (isset($_GET["bln"])) {
+                    $selectedMonth = $_GET["bln"];
+                    // Convert the selected month to its corresponding name
+                    $monthNames = [
+                      "01" => "Januari",
+                      "02" => "Februari",
+                      "03" => "Maret",
+                      "04" => "April",
+                      "05" => "Mei",
+                      "06" => "Juni",
+                      "07" => "Juli",
+                      "08" => "Agustus",
+                      "09" => "September",
+                      "10" => "Oktober",
+                      "11" => "November",
+                      "12" => "Desember"
+                    ];
+
+                    // Display the selected month using <h1> tags and centering class
+                    echo "<h3 class='center'>BULAN : " . $monthNames[$selectedMonth] . "</h3>";
+                  }
+                }
+                ?>
 
                 <?php
                 if (isset($_GET['bln'])) {

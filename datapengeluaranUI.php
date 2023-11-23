@@ -85,10 +85,6 @@ require_once('koneksi.php');
             </a>
           </li>
 
-          <li class="menu-item-">
-            <a href="maps.php" aria-haspopup="true" aria-expanded="false">
-              <i class="menu-icon fa fa-map"></i>Maps</a>
-          </li>
           <li class="menu-title">Log Out</li>
           <!-- /.menu-title -->
 
@@ -274,7 +270,7 @@ require_once('koneksi.php');
                       <label>Nominal</label>
                       <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" required name="nominal" id="nominal' . $row['id_pengeluaran'] . '" value="' . $row['Nominal'] . '" class="form-control" />
+                                <input type="number" required name="nominal" id="nominal' . $row['id_pengeluaran'] . '" value="' . $row['Nominal'] . '" class="form-control" />
                                 </div>
                                 
                       <br />
@@ -294,7 +290,7 @@ require_once('koneksi.php');
                     } else {
                       echo "<tr><td colspan='6'>Tidak ada data pengeluaran.</td></tr>";
                     }
-                    $conn->close();
+                    // $conn->close();
                     ?>
                   </tbody>
 
@@ -460,7 +456,7 @@ require_once('koneksi.php');
       <div class="modal-body">
         <form action="insert/insertpengeluaran.php" method="post" id="insert_form" enctype='multipart/form-data'>
           <label>No</label>
-          <input type="text" name="no" id="no" class="form-control" value="<?php echo generateID(); ?>" readonly />
+          <input type="text" required name="no" id="no" class="form-control" value="<?php echo generateID(); ?>" readonly />
           <br />
 
 
@@ -486,13 +482,13 @@ require_once('koneksi.php');
           <br />
 
           <label>Tanggal Pengeluaran</label>
-          <input type="date" name="tanggal" id="tanggal" class="form-control">
+          <input type="date" required name="tanggal" id="tanggal" class="form-control">
           <br />
 
           <label>Nominal</label>
           <div class="input-group">
             <span class="input-group-addon">Rp</span>
-            <input type="text" name="nom" id="nom" class="form-control" />
+            <input type="number" required name="nom" id="nom" class="form-control" />
           </div>
 
           <br />

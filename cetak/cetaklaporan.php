@@ -17,7 +17,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="C:\xampp\htdocs\AswajaTrans\assets\css\AdminLTE.css">
+  <link rel="stylesheet" href="../assets/css/AdminLTE.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,7 +46,7 @@
       <!-- Table row -->
       <div class="row">
         <h1 class="text-center">Laporan Harian</h1>
-        <div class="col-xs-12 table-responsive table-bordered">
+        <div class="table-responsive table-bordered" style="width: 100%;">
           <?php
           include '../koneksi.php';
           include '../fungsi/funct.php';
@@ -64,7 +64,7 @@
           }
           ?>
 
-          <table class="table table-striped table-responsive" border="1">
+          <table class="table table-striped " style="width: 100%;">
             <thead>
               <tr class="warning">
                 <th style="font-size:12px; ">
