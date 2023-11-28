@@ -90,15 +90,26 @@ if (isset($_POST['submit'])) {
 <?php if (@$_SESSION['erorr']) { ?>
   <script>
     Swal.fire({
-      icon: 'eror',
-      title: 'Gagal',
-      text: 'Login Gagal',
+      icon: 'error',
+      title: 'Username Atau Password Salah',
       timer: 2000,
       showConfirmButton: false
     });
   </script>
   <!-- agar sweet alert tidak muncul lagi saat di refresh -->
 <?php unset($_SESSION['erorr']);
+} ?>
+<?php if (@$_SESSION['user']) { ?>
+  <script>
+    Swal.fire({
+      icon: "error",
+      title: "Anda Harus Login Terlebih Dahulu",
+      timer: 2000,
+      showConfirmButton: false
+    });
+  </script>
+  <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+<?php unset($_SESSION['user']);
 } ?>
 
 </html>

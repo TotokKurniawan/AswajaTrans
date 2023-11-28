@@ -1,6 +1,11 @@
 <?php
 require_once("koneksi.php");
 session_start();
+if (!isset($_SESSION['username'])) {
+    $_SESSION['user'] = 'Anda harus login terlebih dahulu.';
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -96,14 +101,20 @@ session_start();
 
                     <script>
                         function logoutConfirmation() {
-                            var confirmation = confirm("Apakah Anda yakin ingin logout?");
-
-                            if (confirmation) {
-                                // Jika pengguna mengklik "OK" dalam pop-up konfirmasi, maka arahkan ke halaman logout
-                                window.location.href = "index.php";
-                            } else {
-                                // Jika pengguna mengklik "Batal," tidak ada tindakan yang diambil
-                            }
+                            Swal.fire({
+                                title: 'Konfirmasi Logout',
+                                text: 'Apakah Anda yakin ingin logout?',
+                                icon: 'question',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, Logout!',
+                                cancelButtonText: 'Batal'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "logout.php";
+                                }
+                            });
                         }
                     </script>
                 </ul>
@@ -160,7 +171,9 @@ session_start();
 
                             <div class="user-menu dropdown-menu">
                                 <a class="dropdown-item" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
-                                <a class="dropdown-item" href="login.php"><i class="fa fa-power-off"></i> Logout</a>
+                                <a class="dropdown-item" href="#" onclick="logoutConfirmation();">
+                                    <i class="fa fa-power-off"></i> Logout
+                                </a>
                             </div>
                         </div>
 
@@ -220,6 +233,10 @@ session_start();
                                         }
                                         ?>
                                     </div><br>
+                                    <div class="form-group">
+                                        <label for="street" class="form-control-label">Tanggal Kembali</label>
+                                        <input type="date" id="tanggal-kembali" name="tanggal-kembali" class="form-control">
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="vat" class="form-control-label">Nopol - Merk Mobil</label>
@@ -258,18 +275,26 @@ session_start();
                                         <label class="form-control-label">Lama Pinjam</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                            <input class="form-control" required name="lamapinjam" id="lamapinjam" onchange="updateTotalHarga()">
+                                            <input class="form-control" required name="lamapinjam" id="lamapinjam" oninput="updateTotalHarga()">
                                             <div class="input-group-addon">hari</div>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label class="form-control-label">Bayar DP Mobil</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
-                                            <input class="form-control" required id="bayar" name="bayar" onchange="updateSisaBayar()">
+                                    <div hidden class="form-group">
+                                        <label hidden class="form-control-label">Bayar DP Mobil</label>
+                                        <div hidden class="input-group">
+                                            <span hidden class="input-group-addon">Rp</span>
+                                            <!-- Use PHP echo to include the value of $_SESSION['bayar'] -->
+                                            <input hidden class="form-control" required id="bayar" name="bayar" value="<?php echo $_SESSION['bayar']; ?>">
                                         </div>
                                     </div>
+
+                                    <script>
+                                        var bayarInput = document.getElementById('bayar');
+                                        bayarInput.addEventListener('input', function() {
+                                            updateSisaBayar();
+                                        });
+                                    </script>
+
 
                                     <div class="form-group">
                                         <label class="form-control-label">Status Bayar</label>
@@ -299,7 +324,7 @@ session_start();
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-lg btn-info btn-block">
-                                        LANJUT PILIH MOBIL
+                                        SIMPAN TRANSAKSI
                                     </button>
                                 </form>
                             </div>

@@ -1,6 +1,11 @@
 <?php
 require_once("koneksi.php");
 session_start();
+if (!isset($_SESSION['username'])) {
+    $_SESSION['user'] = 'Anda harus login terlebih dahulu.';
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -96,14 +101,20 @@ session_start();
 
                     <script>
                         function logoutConfirmation() {
-                            var confirmation = confirm("Apakah Anda yakin ingin logout?");
-
-                            if (confirmation) {
-                                // Jika pengguna mengklik "OK" dalam pop-up konfirmasi, maka arahkan ke halaman logout
-                                window.location.href = "index.php";
-                            } else {
-                                // Jika pengguna mengklik "Batal," tidak ada tindakan yang diambil
-                            }
+                            Swal.fire({
+                                title: 'Konfirmasi Logout',
+                                text: 'Apakah Anda yakin ingin logout?',
+                                icon: 'question',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, Logout!',
+                                cancelButtonText: 'Batal'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "logout.php";
+                                }
+                            });
                         }
                     </script>
                 </ul>
@@ -142,6 +153,9 @@ session_start();
                                 if ($result) {
                                     $row = mysqli_fetch_assoc($result);
                                     $urlFoto = $row['Foto'];
+                                    $namaUser = $row['Nama'];
+
+                                    echo '<span class="mr-2" style="text-transform: uppercase; font-weight: bold;">' . $namaUser . '</span>'; // Display user's name in uppercase and bold
 
                                     if (!is_null($urlFoto)) {
                                         $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
@@ -156,8 +170,10 @@ session_start();
                             </a>
 
                             <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="profile.php"><i class="fa fa- user"></i>My Profile</a>
-                                <a class="nav-link" href="login.php"><i class="fa fa-power -off"></i>Logout</a>
+                                <a class="dropdown-item" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
+                                <a class="dropdown-item" href="#" onclick="logoutConfirmation();">
+                                    <i class="fa fa-power-off"></i> Logout
+                                </a>
                             </div>
                         </div>
 
@@ -232,16 +248,15 @@ session_start();
                                         <input type="text" id="tanggal-sewa" name="tanggal-sewa" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="street" class="form-control-label">Tanggal Kembali</label>
-                                        <input type="date" id="tanggal-kembali" name="tanggal-kembali" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Total Sewa Mobil</label>
+                                        <label class="form-control-label">Bayar DP Sewa</label>
                                         <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-calculator"></i></div>
-                                            <input class="form-control" required name="total-sewa" id="total-sewa">
+                                            <span class="input-group-addon">Rp</span>
+                                            <input class="form-control" required id="bayar" name="bayar" onchange="updateSisaBayar()">
                                         </div>
-                                    </div><br>
+                                    </div>
+
+
+                                    <br>
                                     <div>
                                     </div>
                                     <button type="submit" class="btn btn-lg btn-info btn-block">

@@ -6,15 +6,14 @@ session_start();
 if (!empty($_POST)) {
     $id = $_POST["id"];
     $nopol = $_POST["nopol"];
-    $subtotal = $_POST["subtotal"];
     $lamapinjam = $_POST["lamapinjam"];
     $bayar = $_POST["bayar"];
     $statusbayar = $_POST["stbyar"];
     $totalharga = $_POST["tothar"];
     $sisa = $_POST['sisa'];
 
-    $querySewa = "UPDATE sewa SET bayar='$bayar', `Sisa yang harus dibayar`='$sisa', StatusBayar='$statusbayar', Total_Harga='$totalharga' WHERE id_Sewa='$id'";
-    $queryDetailSewa = "UPDATE detail_sewa SET Nopol='$nopol', Lama_Pinjam ='$lamapinjam', subtotal='$subtotal' WHERE id_Sewa='$id'";
+    $querySewa = "UPDATE sewa SET `Sisa yang harus dibayar`='$sisa', StatusBayar='$statusbayar', Total_Harga='$totalharga' WHERE id_Sewa='$id'";
+    $queryDetailSewa = "INSERT INTO detail_sewa (id_Sewa, Nopol, Tgl_Kembali, Lama_Pinjam, tanggal_pengembalian,  Denda, Keterangan) VALUES ('$id', '$nopol', '$tglkembali', '$lamapinjam', NULL,  '0', ' ')";
 
     $resultSewa = mysqli_query($conn, $querySewa);
     $resultDetailSewa = mysqli_query($conn, $queryDetailSewa);
