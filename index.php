@@ -28,10 +28,6 @@
   <!-- Template Main CSS File -->
   <link href="assets/csslanding/style.css" rel="stylesheet">
 
-  <!--link icon-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-
-
   <!-- =======================================================
   * Template Name: Gp
   * Updated: May 30 2023 with Bootstrap v5.3.0
@@ -166,7 +162,7 @@
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
               <h4>Pelayanan 24 Jam</a></h4>
-              <p>Menyediakan kendaraan yang siap digunakan tepat waktu sesuai dengan jadwal Anda</p>
+              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
             </div>
           </div>
 
@@ -174,7 +170,7 @@
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
               <h4>Mobil Terbaik</a></h4>
-              <p>Menyediakan armada mobil yang terawat dengan berbagai pilihan yang sesuai dengan kebutuhan perjalanan Anda</p>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
             </div>
           </div>
 
@@ -182,7 +178,7 @@
             <div class="icon-box">
               <div class="icon"><i class="bx bx-tachometer"></i></div>
               <h4>Proses Cepat dan Terpecaya</a></h4>
-              <p>Memastikan pengalaman penyewaan  mobil dengan tanpa hambatan dan terpercaya</p>
+              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
             </div>
           </div>
         </div>
@@ -212,14 +208,14 @@
           <p>Kami menyediakan mobil impian Anda dengan kualitas terbaik dan pilihan terlengkap. </p>
         </div>
 
-        <!--<div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
 
             </ul>
           </div>
-        </div>-->
+        </div>
 
         <div class="container">
           <div class="margin" style="margin-left: 50px;">
@@ -365,19 +361,19 @@
           <div class="col-lg-12 d-flex align-items-stretch text-center">
             <div class="info">
               <div class="address">
-                <a href="https://goo.gl/maps/VXvbeuiXpHNJJVF58"><i class="far fa-map"></i></a>
+                <a href="https://goo.gl/maps/VXvbeuiXpHNJJVF58"><i class="bi bi-geo-alt"></i></a>
                 <h4>Lokasi :</h4>
                 <p> Jl. Kelud, Ketapang, Kec. Kademangan, Kota Probolinggo, Jawa Timur 67222</p>
               </div>
 
               <div class="email">
-                <a href="mailto:jalaluddinsuyuthi427@gmail.com"><i class="far fa-envelope"></i></a>
+                <a href="mailto:jalaluddinsuyuthi427@gmail.com"><i class="bi bi-envelope"></i></a>
                 <h4>Email:</h4>
                 <p>jalaluddinsuyuthi427@gmail.com</p>
               </div>
 
               <div class="phone">
-                <a href="https://wa.me/6282261001716?" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/6282261001716?" target="_blank"><i class="bx bxl-whatsapp"></i></a>
                 <h4>WhatsApp:</h4>
                 <p>082261001716</p>
               </div>
@@ -405,7 +401,7 @@
                 Jl. Kelud, Ketapang, Kec. Kademangan, <br>
                 Kota Probolinggo, Jawa Timur 67222 <br><br>
                 <strong>Phone :</strong> 082261001716<br>
-                <strong>Email :</strong> jalaluddinsuyuthi427@gmail.com<br>
+                <strong>Email :</strong>jalaluddinsuyuthi427@gmail.com<br>
               </p>
             </div>
           </div>
@@ -415,7 +411,7 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#superiority">Superiority</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#superiority">superiority</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#portfolio">Cars</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#contact">Contact</a></li>
             </ul>
@@ -426,11 +422,10 @@
             <h4>Our Social Media</h4>
             <p>Anda dapat menghubungi kami dengan klik icon yang dibawah ini </p>
             <div class="social-links mt-4">
-              <a href="https://wa.me/6282261001716?" class="twitter"><i class="fab fa-whatsapp"></i></a>
-              <a href="mailto:jalaluddinsuyuthi427@gmail.com" class="facebook"><i class="far fa-envelope"></i></a>
-              <a href="https://www.instagram.com/aswajatrans_27/?utm_medium=copy_link" class="instagram"><i class="fab fa-instagram"></i></a>
-              <a href="https://goo.gl/maps/VXvbeuiXpHNJJVF58" class="google-plus"><i class="far fa-map"></i></a>
-              <a href="https://t.me/082261001716" class="linkedin"><i class="bx bxl-telegram"></i>
+              <a href="https://wa.me/6282261001716?" class="twitter"><i class="bx bxl-whatsapp"></i></a>
+              <a href="mailto:jalaluddinsuyuthi427@gmail.com" class="facebook"><i class="bi bi-envelope"></i><a href="https://www.instagram.com/aswajatrans_27/?utm_medium=copy_link" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://goo.gl/maps/VXvbeuiXpHNJJVF58" class="google-plus"><i class="bi bi-geo-alt"></i></a>
+                <a href="https://t.me/082261001716" class="linkedin"><i class="bi bi-telegram"></i>
             </div>
           </div>
 

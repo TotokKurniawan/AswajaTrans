@@ -2,14 +2,11 @@
 require("../koneksi.php");
 header('Content-Type: application/json');
 
-$query = "SELECT MONTH(tgl_sewa) AS bulan, COUNT(id_Sewa) AS jumlah_id
-          FROM sewa
-          GROUP BY MONTH(tgl_sewa)"; 
+$query = "SELECT Tgl_Pengeluaran, nominal FROM pengeluaran";  // Mengambil kolom tanggal dan nominal
 
 $result = mysqli_query($conn, $query);
 
-$data = array(); // Membuat array kosong untuk menyimpan data
-
+$data = array();
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = $row;
 }

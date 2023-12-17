@@ -16,16 +16,13 @@ if (isset($_POST['update'])) {
     $fotoFileName = '';
 
     if ($foto['size'] > 0) {
-        $targetDirectory = __DIR__ . '/../fotoprofil/';
-        $fotoFileName = basename($foto['name']);
-        $new_foto_full_path = $targetDirectory . $fotoFileName;
+        $targetDirectory = 'C:/xampp/htdocs/AswajaTrans/AswajaTrans/AswajaTrans/Fotoprofil/';
+        $fotoFileName = $targetDirectory . basename($foto['name']);
 
-        if (move_uploaded_file($foto['tmp_name'], $new_foto_full_path)) {
+        if (move_uploaded_file($foto['tmp_name'], $fotoFileName)) {
             // File berhasil diupload
         } else {
-
             echo "Error uploading file.";
-            print(error_get_last()['message']);
             exit();
         }
     }

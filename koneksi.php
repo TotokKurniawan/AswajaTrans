@@ -13,3 +13,4 @@ if ($conn->connect_error) {
 } else {
     // var_dump(mysqli_query($conn,'SELECT * FROM user')->fetch_assoc());
 }
+?>

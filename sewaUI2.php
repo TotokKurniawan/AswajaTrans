@@ -147,7 +147,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="user-area dropdown float-right">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?php
-                                $query = "SELECT Foto, Nama FROM user WHERE Username = '" . $_SESSION['username'] . "'";
+                                $query = "SELECT Foto, Nama FROM User WHERE Username = '" . $_SESSION['username'] . "'";
                                 $result = mysqli_query($conn, $query);
 
                                 if ($result) {
@@ -158,11 +158,10 @@ if (!isset($_SESSION['username'])) {
                                     echo '<span class="mr-2" style="text-transform: uppercase; font-weight: bold;">' . $namaUser . '</span>'; // Display user's name in uppercase and bold
 
                                     if (!is_null($urlFoto)) {
-                                ?>
-                                        <img alt='' src="<?php echo "fotoprofil/$urlFoto" ?>" class='user-avatar rounded-circle img-thumbnail img-fluid'>
-                                <?php
+                                        $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
+                                        echo '<img alt="User Avatar" src="' . $urlFoto . '" class="user-avatar rounded-circle img-thumbnail img-fluid">';
                                     } else {
-                                        echo '<img alt="" src="assets/images/Polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid" >';
+                                        echo '<img alt="User Avatar" src="assets/images/polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid">';
                                     }
                                 } else {
                                     echo 'Error dalam menjalankan query: ' . mysqli_error($conn);
@@ -235,13 +234,14 @@ if (!isset($_SESSION['username'])) {
                                         ?>
                                     </div><br>
                                     <div class="form-group">
-                                        <label for="kembali" class="form-control-label">Tanggal Kembali</label>
+                                        <label for="street" class="form-control-label">Tanggal Kembali</label>
                                         <input type="date" id="tanggal-kembali" name="tanggal-kembali" class="form-control">
                                     </div>
+
                                     <div class="form-group">
                                         <label for="vat" class="form-control-label">Nopol - Merk Mobil</label>
                                         <?php
-                                        $query = "SELECT Nopol, MerkMobil, Harga FROM mobil WHERE Status = 'Mobil Belum Disewa'";
+                                        $query = "SELECT nopol, MerkMobil, Harga FROM mobil WHERE Status = 'Mobil Belum Disewa'";
                                         $result = mysqli_query($conn, $query);
 
                                         if ($result) {
@@ -250,8 +250,8 @@ if (!isset($_SESSION['username'])) {
                                             echo '<option value="" disabled selected>Pilih Mobil</option>';
 
                                             while ($row = mysqli_fetch_assoc($result)) {
-                                                $selected = ($row['Nopol'] == $defaultNopol) ? 'selected' : '';
-                                                echo '<option value="' . $row['Nopol'] . '" ' . $selected . ' data-harga="' . $row['Harga'] . '">' . $row['Nopol'] . " - " . $row['MerkMobil'] . '  </option>';
+                                                $selected = ($row['nopol'] == $defaultNopol) ? 'selected' : '';
+                                                echo '<option value="' . $row['nopol'] . '" ' . $selected . ' data-harga="' . $row['Harga'] . '">' . $row['nopol'] . " - " . $row['MerkMobil'] . '  </option>';
                                             }
                                             echo '</select>';
 
@@ -440,7 +440,7 @@ if (!isset($_SESSION['username'])) {
             {
                 try {
                     // Sambungkan ke database Anda
-                    $conn = mysqli_connect("mifd.myhost.id", "mifdmyho_aswajatrans", "WSImif2023", "mifdmyho_aswajatrans");
+                    $conn = mysqli_connect("localhost", "root", "", "aswajatrans2");
 
                     // Periksa koneksi
                     if (mysqli_connect_errno()) {

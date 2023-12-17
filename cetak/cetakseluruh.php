@@ -66,7 +66,7 @@
 
                         $result = $sql->get_result();
                     ?>
-                        <table class="table  " style="width: 100%;" border="1">
+                        <table class="table table-striped " style="width: 100%;">
                             <thead>
                                 <tr class="warning">
                                     <th>

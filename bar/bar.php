@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>Contoh Penggunaan BarsGraph</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
         BODY {
+            /* width: 550PX; */
             height: 500%;
             width: 100%;
             margin: 0 auto;
+
         }
 
         #chart-container {
@@ -17,8 +17,12 @@
             height: auto;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!-- <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/chart.js/Chart.min.js"></script> -->
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
 </head>
 
 <body>
@@ -32,76 +36,55 @@
         });
 
         function showGraph() {
-            $.ajax({
-                url: "bar_encode.php",
-                type: "POST",
-                dataType: "json",
-                success: function(data) {
-                    console.log(data);
+            {
+                $.post("bar_encode.php",
+                    function(data) {
+                        console.log(data);
 
-                    var allMonths = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                        // Daftar bulan lengkap
+                        var allMonths = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-                    var labels = [];
-                    var valuesSewa = [];
-                    var valuesPengeluaran = [];
+                        var labels = [];
+                        var values = [];
 
-                    var monthDataSewa = {};
-                    var monthDataPengeluaran = {};
+                        // Inisialisasi objek untuk menyimpan data bulan
+                        var monthData = {};
 
-                    for (var i in data.sewa) {
-                        var month = data.sewa[i].bulan;
-                        monthDataSewa[month] = data.sewa[i].jumlah_pendapatan;
-                    }
-
-                    for (var i in data.pengeluaran) {
-                        var month = data.pengeluaran[i].bulan;
-                        monthDataPengeluaran[month] = data.pengeluaran[i].jumlah_pengeluaran;
-                    }
-
-                    for (var i = 1; i <= 12; i++) {
-                        labels.push(allMonths[i - 1]);
-                        valuesSewa.push(monthDataSewa[i] || 0);
-                        valuesPengeluaran.push(monthDataPengeluaran[i] || 0);
-                    }
-
-                    var chartdata = {
-                        labels: labels,
-                        datasets: [{
-                            label: ' PENDAPATAN',
-                            backgroundColor: '#49e2ff',
-                            borderColor: '#46d5f1',
-                            hoverBackgroundColor: '#CCCCCC',
-                            hoverBorderColor: '#666666',
-                            data: valuesSewa
-                        }, {
-                            label: ' PENGELUARAN',
-                            backgroundColor: '#ff9999',
-                            borderColor: '#ff6666',
-                            hoverBackgroundColor: '#CCCCCC',
-                            hoverBorderColor: '#666666',
-                            data: valuesPengeluaran
-                        }]
-                    };
-
-                    var graphTarget = $('#graphCanvas');
-
-                    var barGraph = new Chart(graphTarget, {
-                        type: 'bar',
-                        data: chartdata,
-                        options: {
-                            title: {
-                                display: true,
-                                text: 'PENDAPATAN DAN PENGELUARAN UNTUK TAHUN INI '
-                            }
+                        // Memasukkan data yang diterima ke dalam objek monthData
+                        for (var i in data) {
+                            var month = data[i].bulan;
+                            monthData[month] = data[i].jumlah_id;
                         }
-                    });
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error("AJAX Error:", textStatus, errorThrown);
-                }
-            });
+
+                        // Loop melalui daftar bulan lengkap dan buat label dan data
+                        for (var i = 1; i <= 12; i++) {
+                            labels.push(allMonths[i - 1]); // Menambahkan nama bulan ke dalam label
+                            values.push(monthData[i] || 0); // Menambahkan jumlah id_Sewa atau 0 jika data tidak ada
+                        }
+
+                        var chartdata = {
+                            labels: labels,
+                            datasets: [{
+                                label: 'TOTAL SEWA',
+                                backgroundColor: '#49e2ff',
+                                borderColor: '#46d5f1',
+                                hoverBackgroundColor: '#CCCCCC',
+                                hoverBorderColor: '#666666',
+                                data: values
+                            }]
+                        };
+
+                        var graphTarget = $('#graphCanvas');
+
+                        var barGraph = new Chart(graphTarget, {
+                            type: 'bar',
+                            data: chartdata
+                        });
+                    }, "json");
+            }
         }
     </script>
+
 </body>
 
 </html>

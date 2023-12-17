@@ -147,7 +147,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="user-area dropdown float-right">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?php
-                                $query = "SELECT Foto, Nama FROM user WHERE Username = '" . $_SESSION['username'] . "'";
+                                $query = "SELECT Foto, Nama FROM User WHERE Username = '" . $_SESSION['username'] . "'";
                                 $result = mysqli_query($conn, $query);
 
                                 if ($result) {
@@ -158,11 +158,10 @@ if (!isset($_SESSION['username'])) {
                                     echo '<span class="mr-2" style="text-transform: uppercase; font-weight: bold;">' . $namaUser . '</span>'; // Display user's name in uppercase and bold
 
                                     if (!is_null($urlFoto)) {
-                                ?>
-                                        <img alt='' src="<?php echo "fotoprofil/$urlFoto" ?>" class='user-avatar rounded-circle img-thumbnail img-fluid'>
-                                <?php
+                                        $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
+                                        echo '<img alt="User Avatar" src="' . $urlFoto . '" class="user-avatar rounded-circle img-thumbnail img-fluid">';
                                     } else {
-                                        echo '<img alt="" src="assets/images/Polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid" >';
+                                        echo '<img alt="User Avatar" src="assets/images/polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid">';
                                     }
                                 } else {
                                     echo 'Error dalam menjalankan query: ' . mysqli_error($conn);
@@ -255,6 +254,8 @@ if (!isset($_SESSION['username'])) {
                                             <input class="form-control" required id="bayar" name="bayar" onchange="updateSisaBayar()">
                                         </div>
                                     </div>
+
+
                                     <br>
                                     <div>
                                     </div>
@@ -377,8 +378,8 @@ if (!isset($_SESSION['username'])) {
             {
                 try {
                     // Sambungkan ke database Anda
-
                     $conn = mysqli_connect("localhost", "root", "", "aswajatrans2");
+
                     // Periksa koneksi
                     if (mysqli_connect_errno()) {
                         echo "Koneksi ke database gagal: " . mysqli_connect_error();
