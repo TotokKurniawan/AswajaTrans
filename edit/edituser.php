@@ -16,7 +16,7 @@ if (isset($_POST['update'])) {
     $fotoFileName = '';
 
     if ($foto['size'] > 0) {
-        $targetDirectory = 'C:/xampp/htdocs/AswajaTrans/AswajaTrans/AswajaTrans/Fotoprofil/';
+        $targetDirectory = 'C:/laragon/www/AswajaTrans/fotoprofil/';
         $fotoFileName = $targetDirectory . basename($foto['name']);
 
         if (move_uploaded_file($foto['tmp_name'], $fotoFileName)) {

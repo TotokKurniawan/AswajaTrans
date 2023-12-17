@@ -11,9 +11,11 @@ if (!empty($_POST)) {
     $statusbayar = $_POST["stbyar"];
     $totalharga = $_POST["tothar"];
     $sisa = $_POST['sisa'];
+    $kembali = $_POST['tanggal-kembali'];
+
 
     $querySewa = "UPDATE sewa SET `Sisa yang harus dibayar`='$sisa', StatusBayar='$statusbayar', Total_Harga='$totalharga' WHERE id_Sewa='$id'";
-    $queryDetailSewa = "INSERT INTO detail_sewa (id_Sewa, Nopol, Tgl_Kembali, Lama_Pinjam, tanggal_pengembalian,  Denda, Keterangan) VALUES ('$id', '$nopol', '$tglkembali', '$lamapinjam', NULL,  '0', ' ')";
+    $queryDetailSewa = "INSERT INTO detail_sewa (id_Sewa, Nopol, Tgl_Kembali, Lama_Pinjam, tanggal_pengembalian,  Denda, Keterangan) VALUES ('$id', '$nopol', '$kembali', '$lamapinjam', NULL,  '0', ' ')";
 
     $resultSewa = mysqli_query($conn, $querySewa);
     $resultDetailSewa = mysqli_query($conn, $queryDetailSewa);
