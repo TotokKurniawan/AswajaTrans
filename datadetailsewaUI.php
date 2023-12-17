@@ -147,7 +147,7 @@ if (!isset($_SESSION['username'])) {
             <div class="user-area dropdown float-right">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php
-                $query = "SELECT Foto, Nama FROM User WHERE Username = '" . $_SESSION['username'] . "'";
+                $query = "SELECT Foto, Nama FROM user WHERE Username = '" . $_SESSION['username'] . "'";
                 $result = mysqli_query($conn, $query);
 
                 if ($result) {
@@ -158,10 +158,11 @@ if (!isset($_SESSION['username'])) {
                   echo '<span class="mr-2" style="text-transform: uppercase; font-weight: bold;">' . $namaUser . '</span>'; // Display user's name in uppercase and bold
 
                   if (!is_null($urlFoto)) {
-                    $urlFoto = str_replace($_SERVER['DOCUMENT_ROOT'], '', $urlFoto);
-                    echo '<img alt="User Avatar" src="' . $urlFoto . '" class="user-avatar rounded-circle img-thumbnail img-fluid">';
+                ?>
+                    <img alt='' src="<?php echo "fotoprofil/$urlFoto" ?>" class='user-avatar rounded-circle img-thumbnail img-fluid'>
+                <?php
                   } else {
-                    echo '<img alt="User Avatar" src="assets/images/polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid">';
+                    echo '<img alt="" src="assets/images/Polije.png" class="user-avatar rounded-circle img-thumbnail img-fluid" >';
                   }
                 } else {
                   echo 'Error dalam menjalankan query: ' . mysqli_error($conn);
@@ -236,11 +237,11 @@ if (!isset($_SESSION['username'])) {
                   </thead>
                   <tbody>
                     <?php
+                    $sql = "SELECT detail_sewa.*, mobil.MerkMobil FROM detail_sewa
+JOIN mobil ON mobil.Nopol = detail_sewa.Nopol
+WHERE detail_sewa.tanggal_pengembalian IS NULL
+ORDER BY detail_sewa.id_Sewa ASC";
 
-                    // Query SQL untuk mengambil data mobil
-                    $sql = "SELECT detail_sewa.*, mobil.MerkMobil from detail_sewa
-                    JOIN mobil ON mobil.Nopol = detail_sewa.Nopol
-                    ORDER BY detail_sewa.id_Sewa ASC";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {
@@ -377,7 +378,7 @@ if ($result) {
                         <input type="text" required value="' . $row["id_Sewa"] . '" name="id" id="id' . $row["id_Sewa"] . '" class="form-control" readonly>
                         <br>
                         <label> Nopol</label>
-                        <input type="text" required value="' . $row["id_Sewa"] . '" name="nopol" id="nopol' . $row["Nopol"] . '" class="form-control" readonly>
+                        <input type="text" required value="' . $row["Nopol"] . '" name="nopol" id="nopol' . $row["id_Sewa"] . '" class="form-control" readonly>
                         <br>
                         <label>Tanggal Kembali</label>
                         <input type="date" required name="tglkembali" id="tglkembali' . $row["id_Sewa"] . '" value="' . $row["Tgl_Kembali"] . '" class="form-control" readonly />
