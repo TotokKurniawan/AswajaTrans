@@ -275,7 +275,7 @@ if (!isset($_SESSION['username'])) {
                     <input type="text" required value="' . $row['id_pengeluaran'] . '" name="id_pengeluaran" id="id_pengeluaran' . $row['id_pengeluaran'] . '" class="form-control" readonly>
                     <br>
                     <label >Nopol</label>  
-                    <input type="text" required value="' . $row['Nopol'] . '" name="id_pengeluaran" id="id_pengeluaran' . $row['id_pengeluaran'] . '" class="form-control" readonly>
+                    <input type="text" required value="' . $row['Nopol'] . '" name="nopol" id="nopol' . $row['id_pengeluaran'] . '" class="form-control" readonly>
                     <br>
                     <label>Tanggal Pengeluaran</label>
                     <input type="date" required name="tgl_pengeluaran" id="tgl_pengeluaran' . $row['id_pengeluaran'] . '" value="' . $row['Tgl_Pengeluaran'] . '" class="form-control" />

@@ -6,9 +6,7 @@ if (!isset($_SESSION['username'])) {
   header("Location: login.php");
   exit;
 }
-
 ?>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -41,7 +39,7 @@ if (!isset($_SESSION['username'])) {
 
   <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="sweetallert/sweetalert2.min.css">
+  <link rel="stylesheet" href="sweetallert/sweetalert2.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
@@ -169,7 +167,6 @@ if (!isset($_SESSION['username'])) {
       <!-- /.navbar-collapse -->
     </nav>
   </aside> <!-- /#left-panel -->
-
   <!-- /#left-panel -->
   <!-- Right Panel -->
   <div id="right-panel" class="right-panel">
@@ -180,7 +177,6 @@ if (!isset($_SESSION['username'])) {
           <a class="navbar-brand" style="color: black ; " href="">
             <h4><span>ASWAJA TRANS</span></h3>
           </a>
-          <a class="navbar-brand hidden" href="./"><img src="assets/images/logo2.png" alt="Logo" /></a>
           <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
         </div>
       </div>
@@ -227,232 +223,264 @@ if (!isset($_SESSION['username'])) {
 
           </div>
         </div>
+      </div>
     </header>
     <!-- /#header -->
     <!-- Content -->
     <div class="content">
-      <!-- Widgets  -->
-      <div class="row">
-        <div class="col-lg-4 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="stat-widget-five">
-                <div class="stat-icon dib flat-color-1">
-                  <i class="pe-7s-cash"></i>
+      <!-- Animated -->
+      <div class="animated fadeIn">
+        <!-- Widgets  -->
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="stat-widget-five">
+                  <div class="stat-icon dib flat-color-1">
+                    <i class="pe-7s-cash"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="text-left dib">
+                      <?php
+                      // Query SQL untuk mengambil data pemasukan
+                      $sql = "SELECT SUM(bayar) AS total_pemasukan FROM sewa where YEAR(Tgl_sewa) = YEAR(CURRENT_DATE);";
+                      $result = mysqli_query($conn, $sql);
+
+                      if ($result) {
+                        $row = mysqli_fetch_assoc($result);
+                        $total_pemasukan = $row['total_pemasukan'];
+
+                        // Format angka menjadi format mata uang Rupiah
+                        $total_pemasukan_formatted = "Rp " . number_format($total_pemasukan, 0, ',', '.');
+                      } else {
+                        $total_pemasukan_formatted = "Rp 0";
+                      }
+
+                      // Tutup koneksi ke database
+                      // mysqli_close($conn);
+                      ?>
+
+                      <div class="stat-text">
+                        <span class="pendapatan"><?php echo $total_pemasukan_formatted; ?></span>
+                      </div>
+                      <div class="stat-heading">Pendapatan Tahun Ini </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="stat-content">
-                  <div class="text-left dib">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="stat-widget-five">
+                  <div class="stat-icon dib flat-color-2">
+                    <i class="pe-7s-cart"></i>
+                  </div>
+                  <div class="stat-content">
                     <?php
-                    // Query SQL untuk mengambil data pemasukan
-                    $sql = "SELECT SUM(bayar) AS total_pemasukan FROM sewa where YEAR(Tgl_sewa) = YEAR(CURRENT_DATE);";
+                    $sql = "SELECT SUM(Nominal) AS total_pengeluaran FROM pengeluaran WHERE YEAR(Tgl_Pengeluaran) = YEAR(CURRENT_DATE);";
                     $result = mysqli_query($conn, $sql);
+
+                    $total_pengeluaran_formatted = "Rp 0";
 
                     if ($result) {
                       $row = mysqli_fetch_assoc($result);
-                      $total_pemasukan = $row['total_pemasukan'];
 
-                      // Format angka menjadi format mata uang Rupiah
-                      $total_pemasukan_formatted = "Rp " . number_format($total_pemasukan, 0, ',', '.');
-                    } else {
-                      $total_pemasukan_formatted = "Rp 0";
+                      $total_pengeluaran = $row['total_pengeluaran'];
+
+                      $total_pengeluaran_formatted = "Rp " . number_format($total_pengeluaran, 0, ',', '.');
                     }
-
-                    // Tutup koneksi ke database
-                    // mysqli_close($conn);
                     ?>
-
-                    <div class="stat-text">
-                      <span class="pendapatan"><?php echo $total_pemasukan_formatted; ?></span>
+                    <div class="text-left dib">
+                      <div class="stat-text">
+                        <span class="pengeluaran"><?php echo $total_pengeluaran_formatted; ?></span>
+                      </div>
+                      <div class="stat-heading">Pengeluaran Tahun Ini</div>
                     </div>
-                    <div class="stat-heading">Pendapatan Tahun Ini </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="stat-widget-five">
-                <div class="stat-icon dib flat-color-2">
-                  <i class="pe-7s-cart"></i>
-                </div>
-                <div class="stat-content">
-                  <?php
-                  $sql = "SELECT SUM(Nominal) AS total_pengeluaran FROM pengeluaran WHERE YEAR(Tgl_Pengeluaran) = YEAR(CURRENT_DATE);";
-                  $result = mysqli_query($conn, $sql);
-
-                  $total_pengeluaran_formatted = "Rp 0";
-
-                  if ($result) {
-                    $row = mysqli_fetch_assoc($result);
-
-                    $total_pengeluaran = $row['total_pengeluaran'];
-
-                    $total_pengeluaran_formatted = "Rp " . number_format($total_pengeluaran, 0, ',', '.');
-                  }
-                  ?>
-                  <div class="text-left dib">
-                    <div class="stat-text">
-                      <span class="pengeluaran"><?php echo $total_pengeluaran_formatted; ?></span>
-                    </div>
-                    <div class="stat-heading">Pengeluaran Tahun Ini</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="stat-widget-five">
-                <div class="stat-icon dib flat-color-3">
-                  <i class="pe-7s-browser"></i>
-                </div>
-                <div class="stat-content">
-                  <div class="text-left dib">
-                    <?php
-                    $sql = "SELECT 
+          <div class="col-lg-4 col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="stat-widget-five">
+                  <div class="stat-icon dib flat-color-3">
+                    <i class="pe-7s-browser"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="text-left dib">
+                      <?php
+                      $sql = "SELECT 
                     COUNT(id_Sewa) AS total_sewa
                   FROM 
                     sewa
                   WHERE 
-                    MONTH(tgl_sewa) = MONTH(CURRENT_DATE); ";
-                    $result = mysqli_query($conn, $sql);
+                    YEAR(tgl_sewa) = YEAR(CURRENT_DATE); ";
+                      $result = mysqli_query($conn, $sql);
 
-                    if ($result) {
-                      $row = mysqli_fetch_assoc($result);
-                      $total_sewa = $row['total_sewa'];
-                    } else {
-                      $total_sewa = 0;
-                    }
-                    ?>
+                      if ($result) {
+                        $row = mysqli_fetch_assoc($result);
+                        $total_sewa = $row['total_sewa'];
+                      } else {
+                        $total_sewa = 0;
+                      }
+                      ?>
 
-                    <div class="stat-text">
-                      <span class="count"><?php echo $total_sewa; ?></span>
-                    </div>
-                    <div class="stat-heading">Total Sewa Bulan Ini </div>
+                      <div class="stat-text">
+                        <span class="count"><?php echo $total_sewa; ?></span>
+                      </div>
+                      <div class="stat-heading">Total Sewa Tahun Ini </div>
 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-      </div>
-      <!--  Traffic  -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="box-title">GRAFIK TOTAL SEWA</h4>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="panel-group">
-                  <div class="panel panel-default">
-                    <div class="panel-body"><iframe src="bar/bar.php" width="100%" height="400"></iframe></div>
-                  </div>
-                </div>
-              </div>
-            </div><br>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="panel-group">
-                  <div class="panel panel-default">
-                    <h4 class="box-title"><span>GRAFIK GARIS TOTAL PENGELUARAN</span></h4><br>
-                    <div class="panel-body"><iframe src="line/line.php" width="100%" height="400"></iframe>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
-            <!-- /# column -->
           </div>
+
         </div>
-      </div>
-
-
-      <!-- Calender Chart Weather  -->
-      <div class="row">
-        <div class="col-md-12 col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <!-- <h4 class="box-title">Chandler</h4> -->
-              <div class="calender-cont widget-calender center">
-                <div id="calendar"></div>
+        <!-- /Widgets -->
+        <!--  Traffic  -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="box-title">GRAFIK POWER BI </h4>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card-body">
+                    <div class="panel-group">
+                      <div class="panel panel-default">
+                        <div class="panel-body"></iframe></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="box-title">GRAFIK PENGELURARAN </h4>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card-body">
+                    <div class="panel-group">
+                      <div class="panel panel-default">
+                        <div class="panel-body"><iframe src="line/line.php" width="100%" height="400"></iframe>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.row -->
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="box-title">GRAFIK TOTAL SEWA </h4>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card-body">
+                    <div class="panel-group">
+                      <div class="panel panel-default">
+                        <div class="panel-body"><iframe src="bar/bar.php" width="100%" height="400"></iframe></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.row -->
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <!-- <h4 class="box-title">Chandler</h4> -->
+                <div class="calender-cont widget-calender center">
+                  <div id="calendar"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
-
-
-
-
-
-      <!-- Footer -->
-      <footer class="site-footer">
-        <div class="footer-inner bg-white">
-          <div class="row">
-            <div class="col-sm-6 ">Copyright &copy; 2023 TEAM 1 MIF D</div>
-          </div>
-        </div>
-      </footer>
+      <!-- /# column -->
     </div>
+    <!--  /Traffic -->
+    <div class="clearfix"></div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main2.js"></script>
-
-    <!--  Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
-
-    <!--Chartist Chart-->
-    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+    <!-- /.content -->
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner bg-white">
+        <div class="row">
+          <div class="col-sm-12 text-center">Copyright &copy; 2023 TEAM 1 MIF D</div>
+        </div>
+      </div>
+    </footer>
+  </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="assets/js/init/fullcalendar-init.js"></script>
-    <script src="sweetallert/sweetalert2.min.js"></script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+  <script src="assets/js/main2.js"></script>
 
-    <!--Local Stuff-->
+  <!--  Chart js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+  <!--Chartist Chart-->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
 
 
-    <?php if (@$_SESSION['login']) { ?>
-      <script>
-        Swal.fire({
-          icon: 'success',
-          title: 'Sukses',
-          text: 'Anda Berhasil login',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      </script>
-      <!-- agar sweet alert tidak muncul lagi saat di refresh -->
-    <?php unset($_SESSION['login']);
-    } ?>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+  <script src="assets/js/init/fullcalendar-init.js"></script>
+  <script src="sweetallert/sweetalert2.min.js"></script>
+
+  <!--Local Stuff-->
+
+
+  <?php if (@$_SESSION['login']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'Anda Berhasil login',
+        timer: 2000,
+        showConfirmButton: false
+      });
+    </script>
+    <!-- agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['login']);
+  } ?>
 </body>
 
 </html>
