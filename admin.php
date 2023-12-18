@@ -351,14 +351,11 @@ if (!isset($_SESSION['username'])) {
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h4 class="box-title">GRAFIK POWER BI </h4>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="card-body">
-                    <div class="panel-group">
-                      <div class="panel panel-default">
-                        <div class="panel-body"></iframe></div>
+                <div class="panel-group">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" title="Report Section" src="https://app.powerbi.com/view?r=eyJrIjoiOGQwYzViNDEtOGYyYy00N2IyLTgzYmMtNGE3ZTk1ODE5NWY5IiwidCI6IjUyNjNjYzgxLTU5MTItNDJjNC1hYmMxLWQwZjFiNjY4YjUzMCIsImMiOjEwfQ%3D%3D" frameborder="1" allowfullscreen="True"></iframe>
                       </div>
                     </div>
                   </div>
@@ -366,32 +363,13 @@ if (!isset($_SESSION['username'])) {
               </div>
             </div>
           </div>
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="box-title">GRAFIK PENGELURARAN </h4>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="card-body">
-                    <div class="panel-group">
-                      <div class="panel panel-default">
-                        <div class="panel-body"><iframe src="line/line.php" width="100%" height="400"></iframe>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.row -->
         </div>
+
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h4 class="box-title">GRAFIK TOTAL SEWA </h4>
+                <h4 class="box-title">GRAFIK PENDAPATAN DAN PENGELUARAN </h4>
               </div>
               <div class="row">
                 <div class="col-lg-12">
